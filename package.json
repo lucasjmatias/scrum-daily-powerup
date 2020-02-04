@@ -1,0 +1,19 @@
+{
+  "name": "scrum-daily-powerup",
+  "version": "1.0.0",
+  "description": "Scrum powerup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasjmatias/scrum-daily-powerup.git"
+  },
+  "author": "Lucas de Jesus Matias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasjmatias/scrum-daily-powerup/issues"
+  },
+  "homepage": "https://github.com/lucasjmatias/scrum-daily-powerup#readme"
+}
