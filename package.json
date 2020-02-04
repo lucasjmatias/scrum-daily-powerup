@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lucasjmatias/scrum-daily-powerup/issues"
   },
-  "homepage": "https://github.com/lucasjmatias/scrum-daily-powerup#readme"
+  "homepage": "https://github.com/lucasjmatias/scrum-daily-powerup#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
