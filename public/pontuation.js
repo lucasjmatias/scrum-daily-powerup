@@ -44,7 +44,7 @@ function prepareEvents() {
     if (event.which === 13 && doneInput.value) {
       addDone(doneInput.value);
     }
-    if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105))) { 
+    if (!((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105))) { 
       return false;
     }
   });
