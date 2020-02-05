@@ -37,7 +37,7 @@ function prepareEvents() {
   }
 
   doneInput.addEventListener('keydown', function(event) {
-    let key = Number(e.key)
+    let key = Number(event.key)
     if (event.which === 13) {
         event.stopPropagation();
         event.preventDefault();
@@ -45,7 +45,7 @@ function prepareEvents() {
     if (event.which === 13 && doneInput.value) {
       addDone(doneInput.value);
     }
-    if (isNaN(key) || e.key===null) {
+    if (isNaN(key) || event.key===null) {
       return false;
     }
     else {
