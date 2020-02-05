@@ -20,7 +20,9 @@ for (var i = 0; i < itensTotal.length; i++) {
 function renderItensTotal() {
   for (var i = 0; i < itensTotal.length; i++) {
     var currItem = itensTotal[i];
-    if (currItem.value === pontuacao.total) {
+    console.log(pontuacao);
+    console.log(currItem);
+    if (currItem.innerText === pontuacao.total) {
       currItem.classList.add('mod-primary');
     } else {
       currItem.classList.remove('mod-primary');
