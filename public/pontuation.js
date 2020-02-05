@@ -51,7 +51,7 @@ function prepareEvents() {
     else {
       console.log("is numeric")
     }
-  });
+  }, false);
 
 }
 
