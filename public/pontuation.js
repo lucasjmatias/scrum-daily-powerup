@@ -1,7 +1,7 @@
 var t = TrelloPowerUp.iframe();
 
 var itensTotal = document.getElementsByClassName("item-total");
-var doneInput = document.getElementById("done");
+// var doneInput = document.getElementById("done");
 var doneItens = document.getElementById("done-itens");
 
 var pontuacao = {
@@ -25,6 +25,7 @@ function renderItensTotal() {
     } else {
       currItem.classList.remove('mod-primary');
     }
+    prepareDoneItens();
   }
 };
 
@@ -54,22 +55,22 @@ function prepareEvents() {
     itensTotal[i].addEventListener('click', clickItemTotal, false);
   }
 
-  doneInput.addEventListener('keydown', function(event) {
-    let key = Number(event.key)
-    if (event.which === 13) {
-        event.stopPropagation();
-        event.preventDefault();
-    }
-    if (event.which === 13 && doneInput.value) {
-      addDone(doneInput.value);
-    }
-    if (isNaN(key) || event.key===null) {
-      return false;
-    }
-    else {
-      console.log("is numeric")
-    }
-  }, false);
+  // doneInput.addEventListener('keydown', function(event) {
+  //   let key = Number(event.key)
+  //   if (event.which === 13) {
+  //       event.stopPropagation();
+  //       event.preventDefault();
+  //   }
+  //   if (event.which === 13 && doneInput.value) {
+  //     addDone(doneInput.value);
+  //   }
+  //   if (isNaN(key) || event.key===null) {
+  //     return false;
+  //   }
+  //   else {
+  //     console.log("is numeric")
+  //   }
+  // }, false);
 
 }
 
