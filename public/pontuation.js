@@ -10,7 +10,7 @@ var pontuacao = {
 var clickItemTotal = function() {
   var currItem = this;
   pontuacao.total = currItem.value;
-  currItem.classList.toggle('mod-primary', currItem.value === pontuacao.total);
+  renderItensTotal();
 }
 
 for (var i = 0; i < itensTotal.length; i++) {
@@ -37,6 +37,7 @@ t.render(function(){
   return t.get('card', 'shared', 'pontuacao')
   .then(function(pontuacaoData){
     pontuacao = pontuacaoData || pontuacao;
+    renderItensTotal();
   })
   .then(function(){
     t.sizeTo('#estimate').done();
