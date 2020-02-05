@@ -20,7 +20,11 @@ for (var i = 0; i < itensTotal.length; i++) {
 function renderItensTotal() {
   for (var i = 0; i < itensTotal.length; i++) {
     var currItem = itensTotal[i];
-    currItem.classList.toggle('mod-primary', currItem.value === pontuacao.total);
+    if (currItem.value === pontuacao.total) {
+      currItem.classList.add('mod-primary');
+    } else {
+      currItem.classList.remove('mod-primary');
+    }
   }
 };
 
