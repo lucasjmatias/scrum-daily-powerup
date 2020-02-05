@@ -1,6 +1,7 @@
 var t = TrelloPowerUp.iframe();
 
 var itensTotal = document.getElementsByClassName("item-total");
+var doneInput = document.getElementById("done");
 
 var pontuacao = {
   total: 0,
@@ -13,15 +14,11 @@ var clickItemTotal = function() {
   renderItensTotal();
 }
 
-for (var i = 0; i < itensTotal.length; i++) {
-  itensTotal[i].addEventListener('click', clickItemTotal, false);
-}
+prepareEvents();
 
 function renderItensTotal() {
   for (var i = 0; i < itensTotal.length; i++) {
     var currItem = itensTotal[i];
-    console.log(pontuacao);
-    console.log(currItem);
     if (currItem.innerText === pontuacao.total) {
       currItem.classList.add('mod-primary');
     } else {
@@ -29,6 +26,30 @@ function renderItensTotal() {
     }
   }
 };
+
+function addDone(done) {
+  console.log(done);
+}
+
+function prepareEvents() {
+  for (var i = 0; i < itensTotal.length; i++) {
+    itensTotal[i].addEventListener('click', clickItemTotal, false);
+  }
+
+  doneInput.addEventListener('keydown', function(event) {
+    if (event.which === 13) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    if (event.which === 13 && doneInput.value) {
+      addDone(doneInput.value);
+    }
+    if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105))) { 
+      return false;
+    }
+  });
+
+}
 
 window.estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
