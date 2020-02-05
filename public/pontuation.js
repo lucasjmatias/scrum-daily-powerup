@@ -1,6 +1,7 @@
 var t = TrelloPowerUp.iframe();
 
-var itensTotal = window.getElementsByClassName("item-total");
+var itensTotal = document.getElementsByClassName("item-total");
+
 var pontuacao = {
   total: 0,
   done: []
