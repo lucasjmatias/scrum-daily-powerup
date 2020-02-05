@@ -6,7 +6,7 @@ TrelloPowerUp.initialize({
       callback: function(t) {
         return t.popup({
           title: 'Pontuação',
-          url: 'puntuation.html'
+          url: 'pontuation.html'
         })
       }
     }];
