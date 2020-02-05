@@ -2,6 +2,7 @@ var t = TrelloPowerUp.iframe();
 
 var itensTotal = document.getElementsByClassName("item-total");
 var doneInput = document.getElementById("done");
+var doneItens = document.getElementById("done-itens");
 
 var pontuacao = {
   total: 0,
@@ -26,6 +27,23 @@ function renderItensTotal() {
     }
   }
 };
+
+function prepareDoneItens() {
+  doneItens.innerHTML = "";
+  if (pontuacao && pontuacao.total) {
+    ponto = 1;
+    total = pontuacao.total;
+    var itensText = [];
+    while (total > 0) {
+      itensText.push('<button class="item-total" type="button">' + ponto + '</button>');
+      total = total - ponto;
+      ponto++;
+    }
+    doneItens.innerHTML = itensText.reduce(function(memo, valor) {
+      memo = memo + '\n' + valor;
+    }, '');
+  } 
+}
 
 function addDone(done) {
   console.log(done);
