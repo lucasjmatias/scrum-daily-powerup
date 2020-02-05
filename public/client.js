@@ -15,22 +15,22 @@ TrelloPowerUp.initialize({
     }];
   },
   'card-badges': function(t, options) {
-    return t.get('card', 'shared', 'estimate')
-      .then(function(estimate) {
+    return t.get('card', 'shared', 'pontuacao')
+      .then(function(pontuacao) {
         return [{
-          icon: estimate ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
-          text: estimate || 'No Estimate!',
-          color: estimate ? null : 'red',
+          icon: pontuacao ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
+          text: pontuacao ? pontuacao.total : 'No Estimate!',
+          color: pontuacao ? null : 'red',
         }];  
       });
   },
   'card-detail-badges': function(t, options) {
-    return t.get('card', 'shared', 'estimate')
-    .then(function(estimate) {
+    return t.get('card', 'shared', 'pontuacao')
+    .then(function(pontuacao) {
       return [{
         title: 'Estimate',
-        text: estimate || 'No Estimate!',
-        color: estimate ? null : 'red',
+        text: pontuacao ? pontuacao.total : 'No Estimate!',
+        color: pontuacao ? null : 'red',
         callback: function(t) {
           return t.popup({
             title: "Pontuação",
