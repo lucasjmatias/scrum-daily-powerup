@@ -9,7 +9,7 @@ var pontuacao = {
 
 var clickItemTotal = function() {
   var currItem = this;
-  pontuacao.total = currItem.value;
+  pontuacao.total = currItem.innerText;
   renderItensTotal();
 }
 
