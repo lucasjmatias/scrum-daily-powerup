@@ -36,12 +36,12 @@ function prepareDoneItens() {
     total = pontuacao.total;
     var itensText = [];
     while (total > 0) {
-      itensText.push('<button class="item-total" type="button">' + ponto + '</button>');
+      itensText.push('<button class="item-done" type="button">' + ponto + '</button>');
       total = total - ponto;
       ponto++;
     }
     doneItens.innerHTML = itensText.reduce(function(memo, valor) {
-      memo = memo + '\n' + valor;
+      return memo + '\n' + valor;
     }, '');
   } 
 }
