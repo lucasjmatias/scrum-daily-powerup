@@ -37,6 +37,7 @@ function prepareEvents() {
   }
 
   doneInput.addEventListener('keydown', function(event) {
+    let key = Number(e.key)
     if (event.which === 13) {
         event.stopPropagation();
         event.preventDefault();
@@ -44,8 +45,11 @@ function prepareEvents() {
     if (event.which === 13 && doneInput.value) {
       addDone(doneInput.value);
     }
-    if (!((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105))) { 
+    if (isNaN(key) || e.key===null) {
       return false;
+    }
+    else {
+      console.log("is numeric")
     }
   });
 
