@@ -17,6 +17,7 @@ function itensDoneInput(applyAll) {
   return applyToElements(elementByClass('item-done-input'), applyAll);
 }
 
+
 var itensTotal = document.getElementsByClassName("item-total");
 // var doneInput = document.getElementById("done");
 var doneItensInput = document.getElementById("done-itens-input");
@@ -34,6 +35,16 @@ var clickItemTotal = function() {
 }
 
 prepareEvents();
+
+function contDone() {
+  return pontuacao.done.reduce(function(doneCount, done) {
+    return doneCount + done.pt;
+  }, 0);
+}
+
+function contRemaining() {
+  return pontuacao.total - contDone();
+}
 
 function renderItensTotal() {
   for (var i = 0; i < itensTotal.length; i++) {
@@ -69,13 +80,13 @@ function renderDoneItensInput() {
 function renderDoneList() {
   donelist.innerHTML = "";
   donelist.innerHTML = pontuacao.done.map(function(done) {
-    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.dia + '</li>';
+    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + '</li>';
   }).reduce(concatLn, '');
 }
 
-function addDone(done) {
+function addDone() {
   pontuacao.done.push({
-    pt: done,
+    pt: this.innerText,
     day: 1
   });
   renderDoneList();
