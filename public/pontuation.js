@@ -108,7 +108,7 @@ function renderDoneItensInput() {
 }
 
 function renderDoneList() {
-  showDone.innerText = '(' + contDone() + ')';
+  showDone.innerText = '(' + contDone(pontuacao) + ')';
   donelist.innerHTML = "";
   donelist.innerHTML = pontuacao.done.map(function(done) {
     return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + ' <i class="fas fa-trash"></i></li>';
