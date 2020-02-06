@@ -36,6 +36,7 @@ var itensTotal = elementsByClass("item-total");
 var doneItensInput = elementById("done-itens-input");
 var donelist = elementById("done-list");
 var itemTotalEdit = elementById('item-total-edit');
+var showDone = elementById('show-done');
 
 var pontuacao = {
   total: 0,
@@ -76,6 +77,7 @@ function renderItensTotal() {
     renderDoneItensInput();
   }
   renderDoneList();
+  
 };
 
 function renderDoneItensInput() {
@@ -98,6 +100,7 @@ function renderDoneItensInput() {
 }
 
 function renderDoneList() {
+  showDone.innerText = '(' + contDone() + ')';
   donelist.innerHTML = "";
   donelist.innerHTML = pontuacao.done.map(function(done) {
     return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + '</li>';
