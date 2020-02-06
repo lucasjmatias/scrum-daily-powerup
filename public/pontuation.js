@@ -34,7 +34,7 @@ function prepareDoneItens() {
   if (pontuacao && pontuacao.total) {
     ponto = 1;
     var itensText = [];
-    while (ponto < 10 || ponto < pontuacao.total) {
+    while (ponto < 10 && ponto < pontuacao.total) {
       itensText.push('<button class="item-done" type="button">' + ponto + '</button>');
       ponto++;
     }
