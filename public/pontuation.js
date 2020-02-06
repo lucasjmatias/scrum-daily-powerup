@@ -17,6 +17,15 @@ function itensDoneInput(applyAll) {
   return applyToElements(elementByClass('item-done-input'), applyAll);
 }
 
+function contDone(pontuacao) {
+  return pontuacao.done.reduce(function(doneCount, done) {
+    return doneCount + done.pt;
+  }, 0);
+}
+
+function contRemaining(pontuacao) {
+  return pontuacao.total - contDone(pontuacao);
+}
 
 var itensTotal = document.getElementsByClassName("item-total");
 // var doneInput = document.getElementById("done");
@@ -35,16 +44,6 @@ var clickItemTotal = function() {
 }
 
 prepareEvents();
-
-function contDone() {
-  return pontuacao.done.reduce(function(doneCount, done) {
-    return doneCount + done.pt;
-  }, 0);
-}
-
-function contRemaining() {
-  return pontuacao.total - contDone();
-}
 
 function renderItensTotal() {
   for (var i = 0; i < itensTotal.length; i++) {
@@ -66,7 +65,7 @@ function renderDoneItensInput() {
   if (pontuacao && pontuacao.total) {
     ponto = 1;
     var itensText = [];
-    while (ponto < 10 && ponto <= pontuacao.total) {
+    while (ponto < 10 && ponto <= contRemaining(pontuacao)) {
       itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
       ponto++;
     }
@@ -90,6 +89,7 @@ function addDone() {
     day: 1
   });
   renderDoneList();
+  renderDoneItensInput();
 }
 
 function prepareEvents() {
