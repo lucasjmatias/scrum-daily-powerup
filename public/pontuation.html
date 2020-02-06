@@ -11,43 +11,45 @@
   </head>
   <body >
     <form id="estimate" style="overflow:hidden">
-      <div>
-        <label for="total">Total</label>
-        <button class="item-total" type="button">0</button>
-        <button class="item-total" type="button">1</button>
-        <button class="item-total" type="button">2</button>
-        <button class="item-total" type="button">3</button>
-        <button class="item-total" type="button">5</button>
-        <button class="item-total" type="button">8</button>
-        <button class="item-total" type="button">13</button>
-        <button class="item-total" type="button">21</button>
-        <button class="item-total" type="button">34</button>
-        <button class="item-total" type="button">55</button>
-        <button class="item-total" type="button">89</button>
-        <button class="item-total" type="button">144</button>
-        <button id="item-total-edit" type="button"><i class="fas fa-pencil"></i></button>
-      </div>
-      <div id="done-container">
-        <label for="done">Feito <span id="show-done"></span></label>
-        <nav>
-          <ul class="pagination">
-            <li class="page-item">1</li>
-            <li class="page-item">2</li>
-            <li class="page-item">3</li>
+      <div class="container">
+        <div>
+          <label for="total">Total</label>
+          <button class="item-total" type="button">0</button>
+          <button class="item-total" type="button">1</button>
+          <button class="item-total" type="button">2</button>
+          <button class="item-total" type="button">3</button>
+          <button class="item-total" type="button">5</button>
+          <button class="item-total" type="button">8</button>
+          <button class="item-total" type="button">13</button>
+          <button class="item-total" type="button">21</button>
+          <button class="item-total" type="button">34</button>
+          <button class="item-total" type="button">55</button>
+          <button class="item-total" type="button">89</button>
+          <button class="item-total" type="button">144</button>
+          <button id="item-total-edit" type="button"><i class="fas fa-pencil"></i></button>
+        </div>
+        <div id="done-container">
+          <label for="done">Feito <span id="show-done"></span></label>
+          <nav>
+            <ul class="pagination">
+              <li class="page-item">1</li>
+              <li class="page-item">2</li>
+              <li class="page-item">3</li>
+            </ul>
+          </nav>
+          <select name="sprint-days" id="sprint-days">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <div id="done-itens-input"></div>
+          <ul id="done-list">
           </ul>
-        </nav>
-        <select name="sprint-days" id="sprint-days">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        <div id="done-itens-input"></div>
-        <ul id="done-list">
-        </ul>
-      </div>
-      <div>
-        <button type="submit" class="mod-primary">Save</button>
+        </div>
+        <div>
+          <button type="submit" class="mod-primary">Save</button>
+        </div>
       </div>
     </form>
     <script src="./pontuation.js"></script>
