@@ -35,7 +35,7 @@ var itensTotal = elementsByClass("item-total");
 // var doneInput = document.getElementById("done");
 var doneItensInput = elementById("done-itens-input");
 var donelist = elementById("done-list");
-var itemTotalEdit =  elementById('item-total-edit');
+var itemTotalEdit = elementById('item-total-edit');
 
 var pontuacao = {
   total: 0,
