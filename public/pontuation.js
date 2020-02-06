@@ -56,6 +56,7 @@ function renderItensTotal() {
     }
     renderDoneItensInput();
   }
+  renderDoneList();
 };
 
 function renderDoneItensInput() {
