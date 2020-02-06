@@ -2,7 +2,7 @@ var t = TrelloPowerUp.iframe();
 
 var itensTotal = document.getElementsByClassName("item-total");
 // var doneInput = document.getElementById("done");
-var doneItens = document.getElementById("done-itens");
+var doneItensInput = document.getElementById("done-itens-input");
 
 var pontuacao = {
   total: 0,
@@ -25,27 +25,37 @@ function renderItensTotal() {
     } else {
       currItem.classList.remove('mod-primary');
     }
-    prepareDoneItens();
+    renderDoneItensInput();
   }
 };
 
-function prepareDoneItens() {
-  doneItens.innerHTML = "";
+function itensDoneInput() {
+  return document.getElementsByClassName("item-done-input");
+}
+
+function renderDoneItensInput() {
+  itensDoneInput().addEventListener('click', addDone, false);
+  doneItensInput.innerHTML = "";
   if (pontuacao && pontuacao.total) {
     ponto = 1;
     var itensText = [];
     while (ponto < 10 && ponto <= pontuacao.total) {
-      itensText.push('<button class="item-done" type="button">' + ponto + '</button>');
+      itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
       ponto++;
     }
-    doneItens.innerHTML = itensText.reduce(function(memo, valor) {
+    doneItensInput.innerHTML = itensText.reduce(function(memo, valor) {
       return memo + '\n' + valor;
     }, '');
+    itensDoneInput().addEventListener('click', addDone, false);
   } 
 }
 
 function addDone(done) {
-  console.log(done);
+  pontuacao.done.push({
+    pt: done,
+    day: 1
+  });
+  console.log(pontuacao.done);
 }
 
 function prepareEvents() {
