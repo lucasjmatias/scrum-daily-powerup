@@ -156,6 +156,9 @@ t.render(function(){
   return t.get('card', 'shared', 'pontuacao')
   .then(function(pontuacaoData){
     pontuacao = pontuacaoData || pontuacao;
+    if (pontuacao && pontuacao.total) {
+      edicaoTotal = false;
+    }
     renderItensTotal();
   })
   .then(function(){
