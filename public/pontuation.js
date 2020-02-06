@@ -4,7 +4,11 @@ function concatLn(first, second) {
   return first + '\n' + second;
 }
 
-function elementByClass(className) {
+function elementById(id) {
+  return document.getElementById(id);
+}
+
+function elementsByClass(className) {
   return document.getElementsByClassName(className);
 }
 
@@ -14,7 +18,7 @@ function applyToElements(elements, applyAll) {
     }
 }
 function itensDoneInput(applyAll) {
-  return applyToElements(elementByClass('item-done-input'), applyAll);
+  return applyToElements(elementsByClass('item-done-input'), applyAll);
 }
 
 function contDone(pontuacao) {
@@ -27,15 +31,18 @@ function contRemaining(pontuacao) {
   return pontuacao.total - contDone(pontuacao);
 }
 
-var itensTotal = document.getElementsByClassName("item-total");
+var itensTotal = elementsByClass("item-total");
 // var doneInput = document.getElementById("done");
-var doneItensInput = document.getElementById("done-itens-input");
-var donelist = document.getElementById("done-list");
+var doneItensInput = elementById("done-itens-input");
+var donelist = elementById("done-list");
+var itemTotalEdit =  elementById('item-total-edit');
 
 var pontuacao = {
   total: 0,
   done: []
 };
+
+var edicaoTotal = true;
 
 var clickItemTotal = function() {
   var currItem = this;
@@ -51,8 +58,19 @@ function renderItensTotal() {
     var currItem = itensTotal[i];
     if (currItem.innerText === pontuacao.total) {
       currItem.classList.add('mod-primary');
+      currItem.classList.remove('invisible');
     } else {
+      if (!edicaoTotal) {
+        currItem.classList.add('invisible');
+      } else {
+        currItem.classList.remove('invisible');
+      }
       currItem.classList.remove('mod-primary');
+    }
+    if (!edicaoTotal) {
+      itemTotalEdit.classList.remove('invisible')
+    } else {
+      itemTotalEdit.classList.add('invisible')
     }
     renderDoneItensInput();
   }
@@ -94,10 +112,17 @@ function addDone() {
   renderDoneItensInput();
 }
 
+function toggleEditTotal() {
+  edicaoTotal = !edicaoTotal;
+  renderItensTotal();  
+}
+
 function prepareEvents() {
   for (var i = 0; i < itensTotal.length; i++) {
     itensTotal[i].addEventListener('click', clickItemTotal, false);
   }
+
+  itemTotalEdit.addEventListener('click', toggleEditTotal, false);
 
   // doneInput.addEventListener('keydown', function(event) {
   //   let key = Number(event.key)
