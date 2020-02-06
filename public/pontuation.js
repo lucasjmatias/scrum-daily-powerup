@@ -1,5 +1,9 @@
 var t = TrelloPowerUp.iframe();
 
+function concatLn(first, second) {
+  return first + '\n' + second;
+}
+
 function elementByClass(className) {
   return document.getElementsByClassName(className);
 }
@@ -55,13 +59,18 @@ function renderDoneItensInput() {
       itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
       ponto++;
     }
-    doneItensInput.innerHTML = itensText.reduce(function(memo, valor) {
-      return memo + '\n' + valor;
-    }, '');
+    doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     itensDoneInput(function(item) {
       item.addEventListener('click', addDone, false)
     });
   } 
+}
+
+function renderDoneList() {
+  donelist.innerHTML = "";
+  donelist.innerHTML = pontuacao.done.map(function(done) {
+    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.dia + '</li>';
+  }).reduce(concatLn, '');
 }
 
 function addDone(done) {
@@ -69,7 +78,7 @@ function addDone(done) {
     pt: done,
     day: 1
   });
-  console.log(pontuacao.done);
+  renderDoneList();
 }
 
 function prepareEvents() {
