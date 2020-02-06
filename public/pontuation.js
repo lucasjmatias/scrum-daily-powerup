@@ -33,11 +33,9 @@ function prepareDoneItens() {
   doneItens.innerHTML = "";
   if (pontuacao && pontuacao.total) {
     ponto = 1;
-    total = pontuacao.total;
     var itensText = [];
-    while (total > 0) {
+    while (ponto < 10 || ponto < pontuacao.total) {
       itensText.push('<button class="item-done" type="button">' + ponto + '</button>');
-      total = total - ponto;
       ponto++;
     }
     doneItens.innerHTML = itensText.reduce(function(memo, valor) {
