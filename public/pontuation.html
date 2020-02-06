@@ -6,8 +6,8 @@
     </style>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
   </head>
-  <body style="overflow: hidden;">
-    <form id="estimate">
+  <body >
+    <form id="estimate" style="overflow:hidden">
       <div>
         <label for="total">Total</label>
         <button class="item-total" type="button">0</button>
@@ -26,6 +26,8 @@
       <div>
         <label for="done">Feito</label>
         <div id="done-itens-input"></div>
+        <ul id="done-list">
+        </ul>
       </div>
       <div>
         <button type="submit" class="mod-primary">Save</button>

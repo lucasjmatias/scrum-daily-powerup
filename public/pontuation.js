@@ -1,8 +1,22 @@
 var t = TrelloPowerUp.iframe();
 
+function elementByClass(className) {
+  return document.getElementsByClassName(className);
+}
+
+function applyToElements(elements, applyAll) {
+    for (var i = 0; i < elements.length; i++) {
+      applyAll(elements[i]);
+    }
+}
+function itensDoneInput(applyAll) {
+  return applyToElements(elementByClass('item-done-input'), applyAll);
+}
+
 var itensTotal = document.getElementsByClassName("item-total");
 // var doneInput = document.getElementById("done");
 var doneItensInput = document.getElementById("done-itens-input");
+var donelist = document.getElementById("done-list");
 
 var pontuacao = {
   total: 0,
@@ -28,13 +42,6 @@ function renderItensTotal() {
     renderDoneItensInput();
   }
 };
-
-function itensDoneInput(applyAll) {
-  var itens = document.getElementsByClassName("item-done-input");
-  for (var i = 0; i < itens.length; i++) {
-    applyAll(itens[i]);
-  }
-}
 
 function renderDoneItensInput() {
   itensDoneInput(function(item) {
