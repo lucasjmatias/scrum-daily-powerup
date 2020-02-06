@@ -87,7 +87,7 @@ function renderDoneList() {
 
 function addDone() {
   pontuacao.done.push({
-    pt: this.innerText,
+    pt: parseInt(this.innerText),
     day: 1
   });
   renderDoneList();
