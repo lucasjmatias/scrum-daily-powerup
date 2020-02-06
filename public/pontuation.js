@@ -4,6 +4,10 @@ function concatLn(first, second) {
   return first + '\n' + second;
 }
 
+function elementsBySelector(query) {
+  return document.querySelectorAll(query);
+}
+
 function elementById(id) {
   return document.getElementById(id);
 }
@@ -17,8 +21,11 @@ function applyToElements(elements, applyAll) {
       applyAll(elements[i]);
     }
 }
-function itensDoneInput(applyAll) {
+function itensDoneInputApply(applyAll) {
   return applyToElements(elementsByClass('item-done-input'), applyAll);
+}
+function itensDoneDelete(applyAll) {
+  return applyToElements(elementsBySelector('.item-done > i.fa-trash'), applyAll);
 }
 
 function contDone(pontuacao) {
@@ -31,10 +38,11 @@ function contRemaining(pontuacao) {
   return pontuacao.total - contDone(pontuacao);
 }
 
-var itensTotal = elementsByClass("item-total");
+var itensTotal = elementsByClass('item-total');
 // var doneInput = document.getElementById("done");
-var doneItensInput = elementById("done-itens-input");
-var donelist = elementById("done-list");
+var doneContainer = elementById('done-container');
+var doneItensInput = elementById('done-itens-input');
+var donelist = elementById('done-list');
 var itemTotalEdit = elementById('item-total-edit');
 var showDone = elementById('show-done');
 
@@ -81,7 +89,7 @@ function renderItensTotal() {
 };
 
 function renderDoneItensInput() {
-  itensDoneInput(function(item) {
+  itensDoneInputApply(function(item) {
     item.removeEventListener('click', addDone, false)
   });
   doneItensInput.innerHTML = "";
@@ -93,7 +101,7 @@ function renderDoneItensInput() {
       ponto++;
     }
     doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    itensDoneInput(function(item) {
+    itensDoneInputApply(function(item) {
       item.addEventListener('click', addDone, false)
     });
   } 
@@ -103,8 +111,11 @@ function renderDoneList() {
   showDone.innerText = '(' + contDone() + ')';
   donelist.innerHTML = "";
   donelist.innerHTML = pontuacao.done.map(function(done) {
-    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + '</li>';
+    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + ' <i class="fas fa-trash"></i></li>';
   }).reduce(concatLn, '');
+  itensDoneDelete(function(item) {
+      item.addEventListener('click', deleteItemDone, false)
+  });
 }
 
 function addDone() {
@@ -114,6 +125,10 @@ function addDone() {
   });
   renderDoneList();
   renderDoneItensInput();
+}
+
+function deleteItemDone() {
+  
 }
 
 function toggleEditTotal() {
