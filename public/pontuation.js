@@ -40,6 +40,7 @@ var pontuacao = {
 var clickItemTotal = function() {
   var currItem = this;
   pontuacao.total = currItem.innerText;
+  pontuacao.done = [];
   renderItensTotal();
 }
 
