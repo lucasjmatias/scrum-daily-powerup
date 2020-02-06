@@ -29,12 +29,17 @@ function renderItensTotal() {
   }
 };
 
-function itensDoneInput() {
-  return document.getElementsByClassName("item-done-input");
+function itensDoneInput(applyAll) {
+  var itens = document.getElementsByClassName("item-done-input");
+  for (var i = 0; i < itens.length; i++) {
+    applyAll(itens[i]);
+  }
 }
 
 function renderDoneItensInput() {
-  itensDoneInput().addEventListener('click', addDone, false);
+  itensDoneInput(function(item) {
+    item.removeEventListener('click', addDone, false)
+  });
   doneItensInput.innerHTML = "";
   if (pontuacao && pontuacao.total) {
     ponto = 1;
@@ -47,6 +52,9 @@ function renderDoneItensInput() {
       return memo + '\n' + valor;
     }, '');
     itensDoneInput().addEventListener('click', addDone, false);
+  itensDoneInput(function(item) {
+    item.addEventListener('click', addDone, false)
+  });
   } 
 }
 
