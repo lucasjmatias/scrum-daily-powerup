@@ -51,10 +51,9 @@ function renderDoneItensInput() {
     doneItensInput.innerHTML = itensText.reduce(function(memo, valor) {
       return memo + '\n' + valor;
     }, '');
-    itensDoneInput().addEventListener('click', addDone, false);
-  itensDoneInput(function(item) {
-    item.addEventListener('click', addDone, false)
-  });
+    itensDoneInput(function(item) {
+      item.addEventListener('click', addDone, false)
+    });
   } 
 }
 
