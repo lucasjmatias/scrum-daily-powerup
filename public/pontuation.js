@@ -28,6 +28,14 @@ function itensDoneDelete(applyAll) {
   return applyToElements(elementsBySelector('.item-done > i.fa-trash'), applyAll);
 }
 
+function itensDoneAdd(applyAll) {
+  return applyToElements(elementsBySelector('.item-done > i.fa-plus-circle'), applyAll);
+}
+
+function itensDoneRemove(applyAll) {
+  return applyToElements(elementsBySelector('.item-done > i.fa-minus-circle'), applyAll);
+}
+
 function contDone(pontuacao) {
   return pontuacao.done.reduce(function(doneCount, done) {
     return doneCount + done.pt;
@@ -45,6 +53,7 @@ var doneItensInput = elementById('done-itens-input');
 var donelist = elementById('done-list');
 var itemTotalEdit = elementById('item-total-edit');
 var showDone = elementById('show-done');
+var sprintSelect = elementById('sprint-days');
 
 var pontuacao = {
   total: 0,
@@ -102,7 +111,7 @@ function renderDoneItensInput() {
     }
     doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     itensDoneInputApply(function(item) {
-      item.addEventListener('click', addDone, false)
+      item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
     });
   } 
 }
@@ -111,23 +120,37 @@ function renderDoneList() {
   showDone.innerText = '(' + contDone(pontuacao) + ')';
   donelist.innerHTML = "";
   donelist.innerHTML = pontuacao.done.map(function(done) {
-    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + ' <i class="fas fa-trash"></i></li>';
+    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
   }).reduce(concatLn, '');
   itensDoneDelete(function(item) {
       item.addEventListener('click', deleteItemDone, false)
   });
+  itensDoneAdd(function(item) {
+      item.addEventListener('click', addItemDone, false)
+  });
+  itensDoneRemove(function(item) {
+      item.addEventListener('click', removeItemDone, false)
+  })
 }
 
-function addDone() {
+function addDone(points, day) {
   pontuacao.done.push({
-    pt: parseInt(this.innerText),
-    day: 1
+    pt: points,
+    day: day
   });
   renderDoneList();
   renderDoneItensInput();
 }
 
 function deleteItemDone() {
+  
+}
+
+function addItemDone() {
+  
+}
+
+function removeItemDone() {
   
 }
 
