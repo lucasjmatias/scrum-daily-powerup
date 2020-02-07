@@ -1,6 +1,6 @@
 function preparePaginationInputItem(item, active) {
   var activeClass = active === item ? 'active' : '';
-  return '<li class="page-item"><a class="page-link ' + activeClass + '" href="#">' + item + '</a></li>'; 
+  return '<li class="page-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
 }
 
 function calculatePaginationOffset(data, active, maxItens) {
