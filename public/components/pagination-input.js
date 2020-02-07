@@ -5,11 +5,11 @@ function preparePaginationInputItem(item, active) {
 
 function calculatePaginationOffset(data, active, maxItens) {
   var sideSize = Math.floor(maxItens/2);
+  var activeIndex = R.findIndex(R.equals(active))(data);
   var max = data.length;
   var negativeItemOffset = max - activeIndex;
   var relativeItemOffset = activeIndex - sideSize + 1;
   var canShowAll = maxItens <= max;
-  var activeIndex = R.findIndex(R.equals(active))(data);
   if (canShowAll) {
     return 0;
   }
