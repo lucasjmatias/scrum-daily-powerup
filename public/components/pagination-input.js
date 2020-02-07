@@ -7,20 +7,16 @@ function calculatePaginationOffset(data, active, maxItens) {
   var sideSize = Math.floor(maxItens/2);
   var activeIndex = paginationInputActiveIndex(data, active);
   var max = data.length;
-  var negativeItemOffset = max - activeIndex;
-  var relativeItemOffset = activeIndex - sideSize;
-  var canShowAll = max <= maxItens;
-  var isCenter = negativeItemOffset == sideSize + 1;
-  if (canShowAll || activeIndex < sideSize) {
+  if (activeIndex < sideSize) {
+    console.log('esquerda');
     return 0;
   }
-  if (negativeItemOffset <= sideSize) {
-    return relativeItemOffset - negativeItemOffset; 
+  if (max - activeIndex <= sideSize) {
+    console.log('direita');
+    return max - maxItens; 
   }
-  if (isCenter) {
-    return relativeItemOffset;
-  }
-  return max - maxItens + 1;
+  console.log('centro');
+  return activeIndex - sideSize;
 }
 
 function paginationInputActiveIndex(data, active) {
