@@ -10,13 +10,17 @@ function calculatePaginationOffset(data, active, maxItens) {
   var negativeItemOffset = max - activeIndex;
   var relativeItemOffset = activeIndex - sideSize;
   var canShowAll = max <= maxItens;
+  var isCenter = negativeItemOffset == sideSize + 1;
   if (canShowAll || activeIndex < sideSize) {
     return 0;
   }
   if (negativeItemOffset <= sideSize) {
     return relativeItemOffset - negativeItemOffset; 
   }
-  return relativeItemOffset;
+  if (isCenter) {
+    return relativeItemOffset;
+  }
+  return max - maxItens;
 }
 
 function paginationInputActiveIndex(data, active) {
