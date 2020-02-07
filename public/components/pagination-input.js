@@ -11,7 +11,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   var negativeItemOffset = max - activeIndex;
   var relativeItemOffset = activeIndex - sideSize + 1;
   var canShowAll = maxItens <= max;
-  var activeIndex = R.findIndex(R.equals(active))(xs);
+  var activeIndex = R.findIndex(R.equals(active))(data);
   if (canShowAll) {
     return 0;
   }
