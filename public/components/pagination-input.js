@@ -11,7 +11,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   if (isLeft) {
     return 0;
   }
-  var isRight = max - activeIndex < sideSize;
+  var isRight = max - activeIndex <= sideSize;
   if (isRight) {
     return max - maxItens; 
   }
