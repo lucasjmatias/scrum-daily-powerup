@@ -20,7 +20,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   if (isCenter) {
     return relativeItemOffset;
   }
-  return max - maxItens;
+  return max - maxItens + 1;
 }
 
 function paginationInputActiveIndex(data, active) {
