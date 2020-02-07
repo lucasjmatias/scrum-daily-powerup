@@ -1,26 +1,5 @@
 var t = TrelloPowerUp.iframe();
 
-function concatLn(first, second) {
-  return first + '\n' + second;
-}
-
-function elementsBySelector(query) {
-  return document.querySelectorAll(query);
-}
-
-function elementById(id) {
-  return document.getElementById(id);
-}
-
-function elementsByClass(className) {
-  return document.getElementsByClassName(className);
-}
-
-function applyToElements(elements, applyAll) {
-    for (var i = 0; i < elements.length; i++) {
-      applyAll(elements[i]);
-    }
-}
 function itensDoneInputApply(applyAll) {
   return applyToElements(elementsByClass('item-done-input'), applyAll);
 }
@@ -36,16 +15,6 @@ function itensDoneRemove(applyAll) {
   return applyToElements(elementsBySelector('.item-done > i.fa-minus-circle'), applyAll);
 }
 
-function contDone(pontuacao) {
-  return pontuacao.done.reduce(function(doneCount, done) {
-    return doneCount + done.pt;
-  }, 0);
-}
-
-function contRemaining(pontuacao) {
-  return pontuacao.total - contDone(pontuacao);
-}
-
 var itensTotal = elementsByClass('item-total');
 // var doneInput = document.getElementById("done");
 var doneContainer = elementById('done-container');
@@ -53,7 +22,7 @@ var doneItensInput = elementById('done-itens-input');
 var donelist = elementById('done-list');
 var itemTotalEdit = elementById('item-total-edit');
 var showDone = elementById('show-done');
-var sprintSelect = elementById('sprint-days');
+var sprintDays = elementById('sprint-days');
 
 var pontuacao = {
   total: 0,
@@ -110,6 +79,7 @@ function renderDoneItensInput() {
       ponto++;
     }
     doneItensInput.innerHTML = itensText.reduce(concatLn, '');
+    renderPaginationInput([1, 2, 3, 4, 5, 6], sprintDays, 1)
     itensDoneInputApply(function(item) {
       item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
     });
