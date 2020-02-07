@@ -32,8 +32,7 @@ function renderPaginationInput(data, container, active) {
   container.innerHTML = '';
   var component = "";
   component = component +  '<nav> <ul class="pagination"> <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
-  console.log(offset);
-  for (var i = offset; i < maxItens && i < data.length; i++) {
+  for (var i = offset; i < (maxItens + offset) && i < data.length; i++) {
     component = component + preparePaginationInputItem(data[i], active) + '\n';
   }
   component = component +  '<ul class="pagination"> <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></nav>'
