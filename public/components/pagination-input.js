@@ -38,7 +38,7 @@ function renderPaginationInput(data, container, active) {
   for (var i = offset; i < maxItens && i < data.length; i++) {
     component = component + preparePaginationInputItemWithActive(data[i]) + '\n';
   }
-  component = component +  '<nav> <ul class="pagination"> <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>'
+  component = component +  '<ul class="pagination"> <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></nav>'
   container.innerHTML = component;
   applyToElements(container.querySelectorAll('nav>ul.pagination>li'), function(elm) {
     elm.addEventListener('click', paginationInputItemSelect, false);
