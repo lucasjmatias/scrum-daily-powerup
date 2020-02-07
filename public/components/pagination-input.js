@@ -16,7 +16,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   if (negativeItemOffset <= sideSize) {
     return relativeItemOffset - negativeItemOffset; 
   }
-  return relativeItemOffset;
+  return activeIndex - sideSize;
 }
 
 function paginationInputActiveIndex(data, active) {
