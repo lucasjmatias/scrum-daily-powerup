@@ -49,7 +49,7 @@ function paginationInputNextPage(data, container, active) {
     return;
   }
   var activeIndex = paginationInputActiveIndex(data, active);
-  renderPaginationInput(data, container, data[activeIndex - 1])
+  renderPaginationInput(data, container, data[activeIndex + 1])
 }
 
 function renderPaginationInput(data, container, active) {
