@@ -68,11 +68,11 @@ function renderPaginationInput(data, container, active) {
   });
   container.innerHTML = '';
   var component = "";
-  component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + paginationInputIsFirst(data, active) ? 'disabled' : '' + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
+  component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
   for (var i = offset; i < (maxItens + offset) && i < data.length; i++) {
     component = component + preparePaginationInputItem(data[i], active) + '\n';
   }
-  component = component +  '<li class="page-item ' + paginationInputIsLast(data, active) ? 'disabled' : '' + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
+  component = component +  '<li class="page-item ' + (paginationInputIsLast(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
   container.innerHTML = component;
   applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
     elm.addEventListener('click', function() {paginationInputItemSelect(data, container, active);}, false);
