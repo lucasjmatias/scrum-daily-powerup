@@ -25,9 +25,7 @@ function paginationInputActiveIndex(data, active) {
 
 function paginationInputIsFirst(data, active) {
   var activeIndex = paginationInputActiveIndex(data, active);
-  if (activeIndex <= 0 ) {
-    return;
-  }
+  return activeIndex <= 0;
 } 
 
 function paginationInputIsLast(data, active) {
