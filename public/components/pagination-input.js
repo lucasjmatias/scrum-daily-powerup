@@ -10,7 +10,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   var negativeItemOffset = max - activeIndex;
   var relativeItemOffset = activeIndex - sideSize + 1;
   var canShowAll = max <= maxItens;
-  if (canShowAll) {
+  if (canShowAll || activeIndex < sideSize) {
     return 0;
   }
   if (negativeItemOffset <= sideSize) {
