@@ -8,7 +8,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   var activeIndex = paginationInputActiveIndex(data, active);
   var max = data.length;
   var negativeItemOffset = max - activeIndex;
-  var relativeItemOffset = activeIndex - sideSize + 1;
+  var relativeItemOffset = activeIndex - sideSize;
   var canShowAll = max <= maxItens;
   if (canShowAll || activeIndex < sideSize) {
     return 0;
@@ -16,7 +16,7 @@ function calculatePaginationOffset(data, active, maxItens) {
   if (negativeItemOffset <= sideSize) {
     return relativeItemOffset - negativeItemOffset; 
   }
-  return activeIndex - sideSize;
+  return relativeItemOffset;
 }
 
 function paginationInputActiveIndex(data, active) {
