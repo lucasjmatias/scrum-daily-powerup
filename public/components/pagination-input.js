@@ -7,15 +7,14 @@ function calculatePaginationOffset(data, active, maxItens) {
   var sideSize = Math.floor(maxItens/2);
   var activeIndex = paginationInputActiveIndex(data, active);
   var max = data.length;
-  if (activeIndex < sideSize) {
-    console.log('esquerda');
+  var isLeft = activeIndex < sideSize;
+  if (isLeft) {
     return 0;
   }
-  if (max - activeIndex <= sideSize) {
-    console.log('direita');
+  var isRight = max - activeIndex < sideSize;
+  if (isRight) {
     return max - maxItens; 
   }
-  console.log('centro');
   return activeIndex - sideSize;
 }
 
@@ -30,7 +29,7 @@ function paginationInputIsFirst(data, active) {
 
 function paginationInputIsLast(data, active) {
   var activeIndex = paginationInputActiveIndex(data, active);
-  return activeIndex >= data.length; 
+  return activeIndex + 1 >= data.length; 
 } 
 
 function paginationInputItemSelect() {
