@@ -1,5 +1,5 @@
 function PaginationInput(data, container, active) {
-  return renderPaginationInput(container, active);
+  return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
     var activeClass = active === item ? 'active' : '';
