@@ -35,49 +35,49 @@ function PaginationInput(data, container, active) {
     return activeIndex + 1 >= data.length; 
   } 
 
-  function paginationInputItemSelect(container, active) {
-    paginationInputGoTo(container, active)
+  function paginationInputItemSelect(active) {
+    paginationInputGoTo(active)
   }
 
-  function paginationInputGoToIndex(container, activeIndex) {
-    renderPaginationInput(container, data[activeIndex]);
+  function paginationInputGoToIndex(activeIndex) {
+    renderPaginationInput(data[activeIndex]);
   }
 
-  function paginationInputGoTo(container, nextActive) {
-    renderPaginationInput(container, nextActive);
+  function paginationInputGoTo(nextActive) {
+    renderPaginationInput(nextActive);
   }
 
-  function paginationInputPreviousPage(container, active) {
+  function paginationInputPreviousPage(active) {
     if (paginationInputIsFirst(active)) {
       return;
     }
     var activeIndex = paginationInputActiveIndex(active);
-    paginationInputGoToIndex(container, activeIndex - 1);
+    paginationInputGoToIndex(activeIndex - 1);
   }
 
-  function paginationInputNextPage(container, active) {
+  function paginationInputNextPage(active) {
     if (paginationInputIsLast(active)) {
       return;
     }
     var activeIndex = paginationInputActiveIndex(active);
-    paginationInputGoToIndex(container, activeIndex + 1);
+    paginationInputGoToIndex(activeIndex + 1);
   }
 
-  function paginationInputItemSelectEvent(container, active) {
+  function paginationInputItemSelectEvent(active) {
     return function() {
-      return paginationInputItemSelect(container, this.innerText);
+      return paginationInputItemSelect(this.innerText);
     }
   }
 
-  function paginationInputPreviousPageEvent(container, active) {
+  function paginationInputPreviousPageEvent(active) {
     return function() {
-      return paginationInputPreviousPage(container, active);
+      return paginationInputPreviousPage(active);
     }
   }
 
-  function paginationInputNextPageEvent(container, active) {
+  function paginationInputNextPageEvent(active) {
     return function() {
-      return paginationInputNextPage(container, active);
+      return paginationInputNextPage(active);
     }
   }
 
@@ -85,7 +85,7 @@ function PaginationInput(data, container, active) {
   var paginationInputNextPageEventWithData;
   var paginationInputPreviousPageEventWithData;
 
-  function renderPaginationInput(container, active) {
+  function renderPaginationInput(active) {
     var maxItens = 5;
     var offset = calculatePaginationOffset(active, maxItens);
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
@@ -98,9 +98,9 @@ function PaginationInput(data, container, active) {
       elm.removeEventListener('click',paginationInputNextPageEventWithData, false);
     });
 
-    paginationInputItemSelectEventWithData =  paginationInputItemSelectEvent(container, active);
-    paginationInputNextPageEventWithData =  paginationInputNextPageEvent(container, active);
-    paginationInputPreviousPageEventWithData =  paginationInputPreviousPageEvent(container, active);
+    paginationInputItemSelectEventWithData =  paginationInputItemSelectEvent(active);
+    paginationInputNextPageEventWithData =  paginationInputNextPageEvent(active);
+    paginationInputPreviousPageEventWithData =  paginationInputPreviousPageEvent(active);
 
     container.innerHTML = '';
     var component = "";
