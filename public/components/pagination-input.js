@@ -62,7 +62,6 @@ function paginationInputNextPage(data, container, active) {
 
 function paginationInputItemSelectEvent(data, container, active) {
   return function() {
-    console.log(this.innerText);
     return paginationInputItemSelect(data, container, this.innerText);
   }
 }
@@ -84,7 +83,7 @@ var paginationInputNextPageEventWithData;
 var paginationInputPreviousPageEventWithData;
 
 function renderPaginationInput(data, container, active) {
-  var maxItens = 7;
+  var maxItens = 5;
   var offset = calculatePaginationOffset(data, active, maxItens);
   applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
     elm.removeEventListener('click', paginationInputItemSelectEventWithData, false);
