@@ -32,7 +32,17 @@ function paginationInputIsLast(data, active) {
   return activeIndex + 1 >= data.length; 
 } 
 
-function paginationInputItemSelect() {
+function paginationInputItemSelect(data, container) {
+  paginationInputGoTo(data, container, this.innerText)
+}
+
+function paginationInputGoToIndex(data, container, activeIndex) {
+  renderPaginationInput(data, container, data[activeIndex])
+}
+
+function paginationInputGoTo(data, container, nextActive) {
+  var activeIndex = paginationInputActiveIndex(data, nextActive);
+  paginationInputGoToIndex(data, container, data[activeIndex])
 }
 
 function paginationInputPreviousPage(data, container, active) {
@@ -40,7 +50,7 @@ function paginationInputPreviousPage(data, container, active) {
     return;
   }
   var activeIndex = paginationInputActiveIndex(data, active);
-  renderPaginationInput(data, container, data[activeIndex - 1])
+  paginationInputGoToIndex(data, container, activeIndex - 1);
 }
 
 function paginationInputNextPage(data, container, active) {
@@ -48,14 +58,16 @@ function paginationInputNextPage(data, container, active) {
     return;
   }
   var activeIndex = paginationInputActiveIndex(data, active);
-  renderPaginationInput(data, container, data[activeIndex + 1])
+  paginationInputGoToIndex(data, container, activeIndex + 1);
 }
 
 function renderPaginationInput(data, container, active) {
   var maxItens = 7;
   var offset = calculatePaginationOffset(data, active, maxItens);
   applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
-    elm.removeEventListener('click', function() {paginationInputItemSelect(data, container, active);}, false);
+    elm.removeEventListener('click', function() {
+      paginationInputGoTo(data, container, this.innerText)
+    }, false);
   });
   applyToElements(container.querySelectorAll('.page-item:first-child'), function(elm) {
     elm.removeEventListener('click',function() {paginationInputPreviousPage(data, container, active);}, false);
