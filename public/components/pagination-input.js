@@ -1,10 +1,9 @@
-function PaginationInput(data, container, active) {
+function PaginationInput(data, container, active, fnSelected) {
   return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
-    console.log("active, item:", active, item);
     var activeClass = active === item ? 'active' : '';
-    return '<li class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
+    return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
   }
 
   function calculatePaginationOffset(active, maxItens) {
@@ -66,7 +65,8 @@ function PaginationInput(data, container, active) {
 
   function paginationInputItemSelectEvent(active) {
     return function() {
-      return paginationInputItemSelect(parseInt(this.innerText));
+      console.log(this.getAttribute('data-value'));
+      return paginationInputItemSelect(this.getAttribute('data-value'));
     }
   }
 
@@ -87,11 +87,9 @@ function PaginationInput(data, container, active) {
   var paginationInputPreviousPageEventWithData;
 
   function renderPaginationInput(active) {
-    console.log("active:" + active);
     var maxItens = 5;
     var offset = calculatePaginationOffset(active, maxItens);
 
-    console.log("active:" + offset);
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
       elm.removeEventListener('click', paginationInputItemSelectEventWithData, false);
     });
@@ -123,5 +121,7 @@ function PaginationInput(data, container, active) {
     applyToElements(container.querySelectorAll('.page-item:last-child'), function(elm) {
       elm.addEventListener('click',paginationInputNextPageEventWithData, false);
     });
+
+    fnSelected(active);
   }
 };

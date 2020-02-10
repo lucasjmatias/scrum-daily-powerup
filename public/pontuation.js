@@ -79,7 +79,9 @@ function renderDoneItensInput() {
       ponto++;
     }
     doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9);
+    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, function(selected) {
+      console.log(selected);
+    });
     itensDoneInputApply(function(item) {
       item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
     });
