@@ -1,14 +1,14 @@
 function PaginationInput(data, container, active) {
-  return renderPaginationInput(data, container, active);
+  return renderPaginationInput(container, active);
    
   function preparePaginationInputItem(item, active) {
     var activeClass = active === item ? 'active' : '';
     return '<li class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
   }
 
-  function calculatePaginationOffset(data, active, maxItens) {
+  function calculatePaginationOffset(active, maxItens) {
     var sideSize = Math.floor(maxItens/2);
-    var activeIndex = paginationInputActiveIndex(data, active);
+    var activeIndex = paginationInputActiveIndex(active);
     var max = data.length;
     var isLeft = activeIndex < sideSize;
     if (isLeft) {
@@ -21,63 +21,63 @@ function PaginationInput(data, container, active) {
     return activeIndex - sideSize;
   }
 
-  function paginationInputActiveIndex(data, active) {
+  function paginationInputActiveIndex(active) {
     return R.findIndex(R.equals(active))(data);
   }
 
-  function paginationInputIsFirst(data, active) {
-    var activeIndex = paginationInputActiveIndex(data, active);
+  function paginationInputIsFirst(active) {
+    var activeIndex = paginationInputActiveIndex(active);
     return activeIndex <= 0;
   } 
 
-  function paginationInputIsLast(data, active) {
-    var activeIndex = paginationInputActiveIndex(data, active);
+  function paginationInputIsLast(active) {
+    var activeIndex = paginationInputActiveIndex(active);
     return activeIndex + 1 >= data.length; 
   } 
 
-  function paginationInputItemSelect(data, container, active) {
-    paginationInputGoTo(data, container, active)
+  function paginationInputItemSelect(container, active) {
+    paginationInputGoTo(container, active)
   }
 
-  function paginationInputGoToIndex(data, container, activeIndex) {
-    renderPaginationInput(data, container, data[activeIndex]);
+  function paginationInputGoToIndex(container, activeIndex) {
+    renderPaginationInput(container, data[activeIndex]);
   }
 
-  function paginationInputGoTo(data, container, nextActive) {
-    renderPaginationInput(data, container, nextActive);
+  function paginationInputGoTo(container, nextActive) {
+    renderPaginationInput(container, nextActive);
   }
 
-  function paginationInputPreviousPage(data, container, active) {
-    if (paginationInputIsFirst(data, active)) {
+  function paginationInputPreviousPage(container, active) {
+    if (paginationInputIsFirst(active)) {
       return;
     }
-    var activeIndex = paginationInputActiveIndex(data, active);
-    paginationInputGoToIndex(data, container, activeIndex - 1);
+    var activeIndex = paginationInputActiveIndex(active);
+    paginationInputGoToIndex(container, activeIndex - 1);
   }
 
-  function paginationInputNextPage(data, container, active) {
-    if (paginationInputIsLast(data, active)) {
+  function paginationInputNextPage(container, active) {
+    if (paginationInputIsLast(active)) {
       return;
     }
-    var activeIndex = paginationInputActiveIndex(data, active);
-    paginationInputGoToIndex(data, container, activeIndex + 1);
+    var activeIndex = paginationInputActiveIndex(active);
+    paginationInputGoToIndex(container, activeIndex + 1);
   }
 
-  function paginationInputItemSelectEvent(data, container, active) {
+  function paginationInputItemSelectEvent(container, active) {
     return function() {
-      return paginationInputItemSelect(data, container, this.innerText);
+      return paginationInputItemSelect(container, this.innerText);
     }
   }
 
-  function paginationInputPreviousPageEvent(data, container, active) {
+  function paginationInputPreviousPageEvent(container, active) {
     return function() {
-      return paginationInputPreviousPage(data, container, active);
+      return paginationInputPreviousPage(container, active);
     }
   }
 
-  function paginationInputNextPageEvent(data, container, active) {
+  function paginationInputNextPageEvent(container, active) {
     return function() {
-      return paginationInputNextPage(data, container, active);
+      return paginationInputNextPage(container, active);
     }
   }
 
@@ -85,9 +85,9 @@ function PaginationInput(data, container, active) {
   var paginationInputNextPageEventWithData;
   var paginationInputPreviousPageEventWithData;
 
-  function renderPaginationInput(data, container, active) {
+  function renderPaginationInput(container, active) {
     var maxItens = 5;
-    var offset = calculatePaginationOffset(data, active, maxItens);
+    var offset = calculatePaginationOffset(active, maxItens);
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
       elm.removeEventListener('click', paginationInputItemSelectEventWithData, false);
     });
@@ -98,17 +98,17 @@ function PaginationInput(data, container, active) {
       elm.removeEventListener('click',paginationInputNextPageEventWithData, false);
     });
 
-    paginationInputItemSelectEventWithData =  paginationInputItemSelectEvent(data, container, active);
-    paginationInputNextPageEventWithData =  paginationInputNextPageEvent(data, container, active);
-    paginationInputPreviousPageEventWithData =  paginationInputPreviousPageEvent(data, container, active);
+    paginationInputItemSelectEventWithData =  paginationInputItemSelectEvent(container, active);
+    paginationInputNextPageEventWithData =  paginationInputNextPageEvent(container, active);
+    paginationInputPreviousPageEventWithData =  paginationInputPreviousPageEvent(container, active);
 
     container.innerHTML = '';
     var component = "";
-    component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
+    component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
     for (var i = offset; i < (maxItens + offset) && i < data.length; i++) {
       component = component + preparePaginationInputItem(data[i], active) + '\n';
     }
-    component = component +  '<li class="page-item ' + (paginationInputIsLast(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
+    component = component +  '<li class="page-item ' + (paginationInputIsLast(active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
     container.innerHTML = component;
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
       elm.addEventListener('click', paginationInputItemSelectEventWithData, false);
