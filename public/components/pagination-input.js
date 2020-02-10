@@ -62,6 +62,7 @@ function paginationInputNextPage(data, container, active) {
 
 function paginationInputItemSelectEvent(data, container, active) {
   return function() {
+    console.log(this.innerText);
     return paginationInputItemSelect(data, container, this.innerText);
   }
 }
