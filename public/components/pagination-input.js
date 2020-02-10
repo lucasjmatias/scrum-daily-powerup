@@ -2,6 +2,7 @@ function PaginationInput(data, container, active) {
   return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
+    console.log("active, item:", active, item);
     var activeClass = active === item ? 'active' : '';
     return '<li class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
   }
@@ -86,8 +87,11 @@ function PaginationInput(data, container, active) {
   var paginationInputPreviousPageEventWithData;
 
   function renderPaginationInput(active) {
+    console.log("active:" + active);
     var maxItens = 5;
     var offset = calculatePaginationOffset(active, maxItens);
+
+    console.log("active:" + offset);
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
       elm.removeEventListener('click', paginationInputItemSelectEventWithData, false);
     });
