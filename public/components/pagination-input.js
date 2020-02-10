@@ -32,17 +32,16 @@ function paginationInputIsLast(data, active) {
   return activeIndex + 1 >= data.length; 
 } 
 
-function paginationInputItemSelect(data, container) {
-  paginationInputGoTo(data, container, this.innerText)
+function paginationInputItemSelect(data, container, active) {
+  paginationInputGoTo(data, container, active)
 }
 
 function paginationInputGoToIndex(data, container, activeIndex) {
-  renderPaginationInput(data, container, data[activeIndex])
+  renderPaginationInput(data, container, data[activeIndex]);
 }
 
 function paginationInputGoTo(data, container, nextActive) {
-  var activeIndex = paginationInputActiveIndex(data, nextActive);
-  paginationInputGoToIndex(data, container, data[activeIndex])
+  renderPaginationInput(data, container, nextActive);
 }
 
 function paginationInputPreviousPage(data, container, active) {
@@ -61,20 +60,45 @@ function paginationInputNextPage(data, container, active) {
   paginationInputGoToIndex(data, container, activeIndex + 1);
 }
 
+function paginationInputItemSelectEvent(data, container, active) {
+  return function() {
+    return paginationInputItemSelect(data, container, this.innerText);
+  }
+}
+
+function paginationInputPreviousPageEvent(data, container, active) {
+  return function() {
+    return paginationInputPreviousPage(data, container, active);
+  }
+}
+
+function paginationInputNextPageEvent(data, container, active) {
+  return function() {
+    return paginationInputNextPage(data, container, active);
+  }
+}
+
+var paginationInputItemSelectEventWithData;
+var paginationInputNextPageEventWithData;
+var paginationInputPreviousPageEventWithData;
+
 function renderPaginationInput(data, container, active) {
   var maxItens = 7;
   var offset = calculatePaginationOffset(data, active, maxItens);
   applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
-    elm.removeEventListener('click', function() {
-      paginationInputGoTo(data, container, this.innerText)
-    }, false);
+    elm.removeEventListener('click', paginationInputItemSelectEventWithData, false);
   });
   applyToElements(container.querySelectorAll('.page-item:first-child'), function(elm) {
-    elm.removeEventListener('click',function() {paginationInputPreviousPage(data, container, active);}, false);
+    elm.removeEventListener('click',paginationInputPreviousPageEventWithData, false);
   });
   applyToElements(container.querySelectorAll('.page-item:last-child'), function(elm) {
-    elm.removeEventListener('click',function() {paginationInputNextPage(data, container, active);}, false);
+    elm.removeEventListener('click',paginationInputNextPageEventWithData, false);
   });
+
+  paginationInputItemSelectEventWithData =  paginationInputItemSelectEvent(data, container, active);
+  paginationInputNextPageEventWithData =  paginationInputNextPageEvent(data, container, active);
+  paginationInputPreviousPageEventWithData =  paginationInputPreviousPageEvent(data, container, active);
+
   container.innerHTML = '';
   var component = "";
   component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
@@ -84,13 +108,13 @@ function renderPaginationInput(data, container, active) {
   component = component +  '<li class="page-item ' + (paginationInputIsLast(data, active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
   container.innerHTML = component;
   applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
-    elm.addEventListener('click', function() {paginationInputItemSelect(data, container, active);}, false);
+    elm.addEventListener('click', paginationInputItemSelectEventWithData, false);
   });
   applyToElements(container.querySelectorAll('.page-item:first-child'), function(elm) {
-    elm.addEventListener('click',function() {paginationInputPreviousPage(data, container, active);}, false);
+    elm.addEventListener('click',paginationInputPreviousPageEventWithData, false);
   });
   applyToElements(container.querySelectorAll('.page-item:last-child'), function(elm) {
-    elm.addEventListener('click',function() {paginationInputNextPage(data, container, active);}, false);
+    elm.addEventListener('click',paginationInputNextPageEventWithData, false);
   });
 }
 
