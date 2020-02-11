@@ -119,10 +119,10 @@ function PaginationInput(data, container, active, extra, fnSelected) {
       elm.addEventListener('click', paginationInputItemSelectEventWithData, false);
     });
     applyToElements(container.querySelectorAll('.page-item:first-child'), function(elm) {
-      elm.addEventListener('click',paginationInputPreviousPageEventWithData, false);
+      elm.addEventListener('click', paginationInputPreviousPageEventWithData, false);
     });
     applyToElements(container.querySelectorAll('.page-item:last-child'), function(elm) {
-      elm.addEventListener('click',paginationInputNextPageEventWithData, false);
+      elm.addEventListener('click', paginationInputNextPageEventWithData, false);
     });
 
     fnSelected(active);

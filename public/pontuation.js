@@ -81,7 +81,9 @@ function renderDoneItensInput() {
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var contPontos = contRemaining(pontuacao);
     if (contPontos > 0) {
-      PaginationInput(R.range(1, contPontos), doneItensInput, null, {});
+      PaginationInput(R.range(1, contPontos), doneItensInput, null, {}, function(selected) {
+        console.log(selected);
+      });
     }
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, {1: 1, 3: 2}, function(selected) {
       console.log(selected);
