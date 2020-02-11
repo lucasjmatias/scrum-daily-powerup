@@ -1,5 +1,5 @@
-function PaginationInput(data, container, active, extra, fnSelected) {
-  var firstCall = true;
+function PaginationInput(data, container, active, extra, executeFirstCall, fnSelected) {
+  var firstCall = executeFirstCall ? false: true;
   return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
