@@ -33,7 +33,7 @@ var edicaoTotal = true;
 
 var clickItemTotal = function() {
   var currItem = this;
-  pontuacao.total = currItem.innerText;
+  pontuacao.total = parseInt(currItem.innerText);
   pontuacao.done = {};
   edicaoTotal = false;
   renderItensTotal();
@@ -81,13 +81,17 @@ function renderDoneItensInput() {
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = pontuacao.done;
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
+      console.log('dia', day);
       var contRestantes = contRemaining(pontuacao);
+      console.log('restantes', contRestantes);
       if (contRestantes > 0) {
         var pontosDiaAtual = pontosDia[day] || 0;
+        console.log('pontosDiaAtual', pontosDiaAtual);
         var ate = contRestantes + pontosDiaAtual + 1;
-        // PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
-        //   addDone(day, points);
-        // });
+        console.log('ate', ate);
+        PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
+          // addDone(day, points);
+        });
       }
     });
     // itensDoneInputApply(function(item) {
