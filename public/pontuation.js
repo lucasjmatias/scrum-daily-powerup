@@ -80,6 +80,7 @@ function renderDoneItensInput() {
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = pontuacao.done;
+    console.log('pontosDia', pontosDia);
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
       console.log('dia', day);
       var contRestantes = contRemaining(pontuacao);
