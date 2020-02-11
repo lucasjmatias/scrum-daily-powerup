@@ -86,11 +86,10 @@ function renderDoneItensInput() {
       console.log('dia', day);
       currDay = day;
       var contRestantes = contRemaining(pontuacao);
-      console.log('restantes', contRestantes);
-      if (contRestantes > 0) {
-        var pontosDiaAtual = pontosDia[day] || 0;
+      var pontosDiaAtual = pontosDia[day] || 0;
+      var ate = contRestantes + pontosDiaAtual + 1;
+      if (ate > 0) {
         console.log('pontosDiaAtual', pontosDiaAtual);
-        var ate = contRestantes + pontosDiaAtual + 1;
         console.log('ate', ate);
         PaginationInput(R.range(1, ate), doneItensInput, pontosDiaAtual, {}, false, function(points) {
           addDone(day, points);
