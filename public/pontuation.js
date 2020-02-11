@@ -74,11 +74,12 @@ function renderDoneItensInput() {
   if (pontuacao && pontuacao.total) {
     ponto = 1;
     var itensText = [];
-    while (ponto < 10 && ponto <= contRemaining(pontuacao)) {
+    while (ponto <= contRemaining(pontuacao)) {
       itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
       ponto++;
     }
-    doneItensInput.innerHTML = itensText.reduce(concatLn, '');
+    // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
+    PaginationInput(R.range(1, contRemaining(pontuacao)), doneItensInput, null);
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, function(selected) {
       console.log(selected);
     });
