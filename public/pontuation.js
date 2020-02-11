@@ -101,7 +101,7 @@ function renderDoneList() {
   donelist.innerHTML = "";
   donelist.innerHTML = R.mapObjIndexed(function(value, day) {
     return '<li class="item-done">' + value + ' - Dia: ' + day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
-  }, pountuacao.done).reduce(concatLn, '');
+  }, pontuacao.done).reduce(concatLn, '');
   itensDoneDelete(function(item) {
       item.addEventListener('click', deleteItemDone, false)
   });
