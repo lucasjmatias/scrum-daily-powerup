@@ -82,7 +82,7 @@ function renderDoneItensInput() {
     var pontosDia = pontuacao.done;
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
       var contRestantes = contRemaining(pontuacao);
-      if (contPontos > 0) {
+      if (contRestantes > 0) {
         var pontosDiaAtual = pontosDia[day] || 0;
         var ate = contRestantes + pontosDiaAtual + 1;
         PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
