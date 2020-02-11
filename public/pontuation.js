@@ -26,7 +26,7 @@ var sprintDays = elementById('sprint-days');
 
 var pontuacao = {
   total: 0,
-  done: []
+  done: {} 
 };
 
 var edicaoTotal = true;
@@ -34,7 +34,7 @@ var edicaoTotal = true;
 var clickItemTotal = function() {
   var currItem = this;
   pontuacao.total = currItem.innerText;
-  pontuacao.done = [];
+  pontuacao.done = {};
   edicaoTotal = false;
   renderItensTotal();
 }
@@ -67,9 +67,9 @@ function renderItensTotal() {
 };
 
 function renderDoneItensInput() {
-  itensDoneInputApply(function(item) {
-    item.removeEventListener('click', addDone, false)
-  });
+  // itensDoneInputApply(function(item) {
+  //   item.removeEventListener('click', addDone, false)
+  // });
   doneItensInput.innerHTML = "";
   if (pontuacao && pontuacao.total) {
     // ponto = 1;
@@ -81,27 +81,27 @@ function renderDoneItensInput() {
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = pontuacao.done;
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
-      var contPontos = contRemaining(pontuacao);
+      var contRestantes = contRemaining(pontuacao);
       if (contPontos > 0) {
         var pontosDiaAtual = pontosDia[day] || 0;
-        var ate = contPontos - pontosDiaAtual + 1;
+        var ate = contRestantes + pontosDiaAtual + 1;
         PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
           addDone(day, points);
         });
       }
     });
-    itensDoneInputApply(function(item) {
-      item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
-    });
+    // itensDoneInputApply(function(item) {
+    //   item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
+    // });
   } 
 }
 
 function renderDoneList() {
   showDone.innerText = '(' + contDone(pontuacao) + ')';
   donelist.innerHTML = "";
-  donelist.innerHTML = pontuacao.done.map(function(done) {
-    return '<li class="item-done">' + done.pt + ' - Dia: ' + done.day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
-  }).reduce(concatLn, '');
+  donelist.innerHTML = R.mapObjIndexed(function(value, day) {
+    return '<li class="item-done">' + value + ' - Dia: ' + day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
+  }, pountuacao.done).reduce(concatLn, '');
   itensDoneDelete(function(item) {
       item.addEventListener('click', deleteItemDone, false)
   });

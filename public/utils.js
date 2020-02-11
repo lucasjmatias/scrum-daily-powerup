@@ -21,9 +21,7 @@ function applyToElements(elements, applyAll) {
 }
 
 function contDone(pontuacao) {
-  return pontuacao.done.reduce(function(doneCount, done) {
-    return doneCount + done.pt;
-  }, 0);
+  return R.sum(R.keys(pontuacao.done)); 
 }
 
 function contRemaining(pontuacao) {
