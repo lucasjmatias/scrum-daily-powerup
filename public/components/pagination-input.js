@@ -1,5 +1,6 @@
 function PaginationInput(data, container, active, extra, fnSelected) {
   return renderPaginationInput(active);
+  var firstCall = true;
    
   function preparePaginationInputItem(item, active) {
     var isActive = active === item;
@@ -123,6 +124,10 @@ function PaginationInput(data, container, active, extra, fnSelected) {
       elm.addEventListener('click', paginationInputNextPageEventWithData, false);
     });
 
-    fnSelected(active);
+    if (firstCall) {
+      firstCall = false;
+    } else {
+      fnSelected(active);
+    }
   }
 };

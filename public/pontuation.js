@@ -90,7 +90,7 @@ function renderDoneItensInput() {
         var ate = contRestantes + pontosDiaAtual + 1;
         console.log('ate', ate);
         PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
-          // addDone(day, points);
+          addDone(day, points);
         });
       }
     });
