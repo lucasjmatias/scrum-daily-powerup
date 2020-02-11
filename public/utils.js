@@ -21,7 +21,7 @@ function applyToElements(elements, applyAll) {
 }
 
 function contDone(pontuacao) {
-  return R.sum(pontuacao.done) || 0; 
+  return R.sum(R.values(pontuacao.done)) || 0; 
 }
 
 function contRemaining(pontuacao) {
