@@ -33,7 +33,7 @@ var edicaoTotal = true;
 
 var clickItemTotal = function() {
   var currItem = this;
-  pontuacao.total = parseInt(currItem.innerText);
+  pontuacao.total = currItem.innerText;
   pontuacao.done = {};
   edicaoTotal = false;
   renderItensTotal();
