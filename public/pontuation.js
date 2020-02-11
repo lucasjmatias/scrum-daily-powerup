@@ -23,6 +23,7 @@ var donelist = elementById('done-list');
 var itemTotalEdit = elementById('item-total-edit');
 var showDone = elementById('show-done');
 var sprintDays = elementById('sprint-days');
+var currDay = 1;
 
 var pontuacao = {
   total: 0,
@@ -81,8 +82,9 @@ function renderDoneItensInput() {
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = pontuacao.done;
     console.log('pontosDia', pontosDia);
-    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, true, function(day) {
+    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, currDay, pontosDia, true, function(day) {
       console.log('dia', day);
+      currDay = day;
       var contRestantes = contRemaining(pontuacao);
       console.log('restantes', contRestantes);
       if (contRestantes > 0) {
