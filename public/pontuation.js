@@ -79,7 +79,7 @@ function renderDoneItensInput() {
     //   ponto++;
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    var pontosDia = {1: 1, 3: 2};
+    var pontosDia = pontuacao.done;
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
       var contPontos = contRemaining(pontuacao);
       if (contPontos > 0) {
@@ -114,10 +114,7 @@ function renderDoneList() {
 }
 
 function addDone(points, day) {
-  pontuacao.done.push({
-    pt: points,
-    day: day
-  });
+  pontuacao.done[day] = points;
   renderDoneList();
   renderDoneItensInput();
 }
