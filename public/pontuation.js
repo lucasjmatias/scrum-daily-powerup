@@ -85,9 +85,9 @@ function renderDoneItensInput() {
       if (contRestantes > 0) {
         var pontosDiaAtual = pontosDia[day] || 0;
         var ate = contRestantes + pontosDiaAtual + 1;
-        PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
-          addDone(day, points);
-        });
+        // PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
+        //   addDone(day, points);
+        // });
       }
     });
     // itensDoneInputApply(function(item) {
