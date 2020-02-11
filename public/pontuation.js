@@ -99,9 +99,11 @@ function renderDoneItensInput() {
 function renderDoneList() {
   showDone.innerText = '(' + contDone(pontuacao) + ')';
   donelist.innerHTML = "";
-  donelist.innerHTML = R.mapObjIndexed(function(value, day) {
+  donelist.innerHTML = R.map(function(valueKey) {
+    var day = valueKey[0];
+    var value = valueKey[1];
     return '<li class="item-done">' + value + ' - Dia: ' + day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
-  }, pontuacao.done).reduce(concatLn, '');
+  }, R.toPairs(pontuacao.done)).reduce(concatLn, '');
   itensDoneDelete(function(item) {
       item.addEventListener('click', deleteItemDone, false)
   });
