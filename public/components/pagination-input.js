@@ -4,7 +4,7 @@ function PaginationInput(data, container, active, extra, fnSelected) {
   function preparePaginationInputItem(item, active) {
     var isActive = active === item;
     var activeClass = isActive ? 'active' : '';
-    var extraTxt = extra[item] ? ' <span class="page-item__extra">' + extra[item] + '</span>' : "" ;
+    var extraTxt = extra[item] ? ' <span class="page-item__extra">' + extra[item] + '</span>' : '' ;
     return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + extraTxt + '</a></li>'; 
   }
 

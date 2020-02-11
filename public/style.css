@@ -5,3 +5,10 @@
 i.fas {
   line-height: inherit;
 }
+
+.page-item__extra {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  font-size: 10px;
+}
