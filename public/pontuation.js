@@ -72,15 +72,18 @@ function renderDoneItensInput() {
   });
   doneItensInput.innerHTML = "";
   if (pontuacao && pontuacao.total) {
-    ponto = 1;
-    var itensText = [];
-    while (ponto <= contRemaining(pontuacao)) {
-      itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
-      ponto++;
-    }
+    // ponto = 1;
+    // var itensText = [];
+    // while (ponto <= contRemaining(pontuacao)) {
+    //   itensText.push('<button class="item-done-input" type="button">' + ponto + '</button>');
+    //   ponto++;
+    // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    PaginationInput(R.range(1, contRemaining(pontuacao)), doneItensInput, null);
-    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, function(selected) {
+    var contPontos = contRemaining(pontuacao);
+    if (contPontos > 0) {
+      PaginationInput(R.range(1, contPontos), doneItensInput, null, {});
+    }
+    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, {1: 1, 3: 2}, function(selected) {
       console.log(selected);
     });
     itensDoneInputApply(function(item) {

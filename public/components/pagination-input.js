@@ -1,9 +1,13 @@
-function PaginationInput(data, container, active, fnSelected) {
+function PaginationInput(data, container, active, extra, fnSelected) {
   return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
     var activeClass = active === item ? 'active' : '';
-    return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + '</a></li>'; 
+    var extraTxt = "";
+    if (extra[active]) {
+      extraTxt = " (" + extra[active] + ")"
+    }
+    return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + extraTxt + '</a></li>'; 
   }
 
   function calculatePaginationOffset(active, maxItens) {
