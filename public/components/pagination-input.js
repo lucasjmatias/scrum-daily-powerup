@@ -1,6 +1,6 @@
 function PaginationInput(data, container, active, extra, fnSelected) {
-  return renderPaginationInput(active);
   var firstCall = true;
+  return renderPaginationInput(active);
    
   function preparePaginationInputItem(item, active) {
     var isActive = active === item;
@@ -68,7 +68,7 @@ function PaginationInput(data, container, active, extra, fnSelected) {
 
   function paginationInputItemSelectEvent(active) {
     return function() {
-      return paginationInputItemSelect(parseInt(this.getAttribute('data-value')));
+      return paginationInputItemSelect(this.getAttribute('data-value'));
     }
   }
 
