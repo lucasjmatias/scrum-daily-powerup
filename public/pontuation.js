@@ -88,6 +88,7 @@ function renderDoneItensInput() {
       var contRestantes = contRemaining(pontuacao);
       var pontosDiaAtual = pontosDia[day] || 0;
       var ate = contRestantes + pontosDiaAtual + 1;
+      console.log('restantes', contRestantes);
       if (ate > 0) {
         console.log('pontosDiaAtual', pontosDiaAtual);
         console.log('ate', ate);
