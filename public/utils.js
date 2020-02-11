@@ -25,5 +25,5 @@ function contDone(pontuacao) {
 }
 
 function contRemaining(pontuacao) {
-  return pontuacao.total - contDone(pontuacao);
+  return parseInt(pontuacao.total) - contDone(pontuacao);
 }
