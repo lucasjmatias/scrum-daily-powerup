@@ -120,7 +120,7 @@ function renderDoneList() {
   })
 }
 
-function addDone(points, day) {
+function addDone(day, points) {
   pontuacao.done[day] = points;
   renderDoneList();
   renderDoneItensInput();
