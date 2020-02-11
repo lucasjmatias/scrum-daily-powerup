@@ -91,7 +91,7 @@ function renderDoneItensInput() {
       if (ate > 0) {
         console.log('pontosDiaAtual', pontosDiaAtual);
         console.log('ate', ate);
-        PaginationInput(R.range(1, ate), doneItensInput, pontosDiaAtual, {}, false, function(points) {
+        PaginationInput(R.range(0, ate), doneItensInput, pontosDiaAtual, {}, false, function(points) {
           addDone(day, points);
         });
       }
