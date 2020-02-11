@@ -68,7 +68,7 @@ function PaginationInput(data, container, active, extra, fnSelected) {
 
   function paginationInputItemSelectEvent(active) {
     return function() {
-      return paginationInputItemSelect(this.getAttribute('data-value'));
+      return paginationInputItemSelect(parseInt(this.getAttribute('data-value')));
     }
   }
 
