@@ -79,14 +79,16 @@ function renderDoneItensInput() {
     //   ponto++;
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    var contPontos = contRemaining(pontuacao);
-    if (contPontos > 0) {
-      PaginationInput(R.range(1, contPontos), doneItensInput, null, {}, function(selected) {
-        console.log(selected);
-      });
-    }
-    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, {1: 1, 3: 2}, function(selected) {
-      console.log(selected);
+    var pontosDia = {1: 1, 3: 2};
+    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, 9, pontosDia, function(day) {
+      var contPontos = contRemaining(pontuacao);
+      if (contPontos > 0) {
+        var pontosDiaAtual = pontosDia[day] || 0;
+        var ate = contPontos - pontosDiaAtual + 1;
+        PaginationInput(R.range(1, ate), doneItensInput, null, {}, function(points) {
+          addDone(day, points);
+        });
+      }
     });
     itensDoneInputApply(function(item) {
       item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
