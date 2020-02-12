@@ -13,7 +13,7 @@ t.render(function(){
     elementById("inicioSprint").value = sprint.inicio;
   })
   .then(function(){
-    t.sizeTo('#springConfigForm').done();
+    // t.sizeTo('#springConfigForm').done();
   });
 });
 
