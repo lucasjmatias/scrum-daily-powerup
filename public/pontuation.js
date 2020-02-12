@@ -24,6 +24,7 @@ var itemTotalEdit = elementById('item-total-edit');
 var showDone = elementById('show-done');
 var sprintDays = elementById('sprint-days');
 var currDay = 1;
+var sprintTotalDays = 1;
 
 var pontuacao = {
   total: 0,
@@ -81,7 +82,7 @@ function renderDoneItensInput() {
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = cleanData(pontuacao.done);
-    PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, currDay, pontosDia, true, function(day) {
+    PaginationInput(R.range(1, sprintTotalDays + 1), sprintDays, currDay, pontosDia, true, function(day) {
       currDay = day;
       var contRestantes = contRemaining(pontuacao);
       var pontosDiaAtual = pontosDia[day] || 0;
@@ -182,7 +183,14 @@ t.render(function(){
     if (pontuacao && pontuacao.total) {
       edicaoTotal = false;
     }
-    renderItensTotal();
+    t.get('board', 'shared', 'sprint')
+    .then(function(sprint) {
+        sprintTotalDays = sprint.dias;
+        var today = moment();
+        var inicio = moment(sprint.inicio, 'DD/MM/YYYY', true);
+        currDay = today.diff(inicio, 'days') + 1;
+        renderItensTotal();
+    });
   })
   .then(function(){
     t.sizeTo('#estimate').done();
