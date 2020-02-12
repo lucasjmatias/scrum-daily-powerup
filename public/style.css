@@ -42,5 +42,9 @@ li.item-done:hover {
 }
 
 #sprint-days-container, #done-itens-input-container, #done-list-container {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
