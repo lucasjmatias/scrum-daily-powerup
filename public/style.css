@@ -16,7 +16,7 @@ i.fas {
 li.item-done {
   max-width: 100px;
   cursor: pointer;
-  padding: 10px;
+  margin-bottom: 5px;
   border-bottom: 1px solid #333;
 }
 
