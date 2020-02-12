@@ -13,6 +13,10 @@ i.fas {
   font-size: 10px;
 }
 
+.page-link {
+  cursor: pointer;
+}
+
 #done-list {
   margin-top: 10px;
 }
