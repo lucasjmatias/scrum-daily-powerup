@@ -2,7 +2,7 @@ var t = TrelloPowerUp.iframe();
 
 var sprint = {
   dias: 0,
-  inicio: moment()
+  inicio: moment().format('DD/MM/YYYY')
 }
 
 t.render(function(){
@@ -10,7 +10,7 @@ t.render(function(){
   .then(function(sprintData){
     sprint = sprintData || sprint;
     elementById("totalDias").value = sprint.dias;
-    elementById("inicioSprint").value = sprint.inicio.format('DD/MM/YYYY');
+    elementById("inicioSprint").value = sprint.inicio;
   })
   .then(function(){
     t.sizeTo('#springConfigForm').done();
@@ -27,7 +27,7 @@ $( function() {
     var mDate =  moment(dateTxt, "DD/MM/YYYY", true);
     if (mDate.isValid() && R.is(Number, dias) && !isNaN(dias)) {
       sprint.dias = dias;
-      sprint.inicio = mDate;
+      sprint.inicio = dateTxt;
       return t.set('board', 'shared', 'sprint', sprint)
           .then(function(){
             t.closePopup();
