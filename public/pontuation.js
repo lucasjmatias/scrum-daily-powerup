@@ -130,7 +130,7 @@ function addDone(day, points) {
   }
   renderDoneList();
   renderDoneItensInput();
-  window.scrollBy(0,100);
+  window.scrollTo(0,document.body.scrollHeight);
 }
 
 function toggleEditTotal() {
