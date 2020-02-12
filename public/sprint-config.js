@@ -1,19 +1,13 @@
 $( function() {
   $("#inicioSprint" ).datepicker($.datepicker.regional[ "pt-BR" ]);
-  $("#totalDias").on('keydown', function(event){
-      // doneInput.addEventListener('keydown', function(event) {
-    let key = Number(event.key)
-    if (event.which === 13) {
-        event.stopPropagation();
-        event.preventDefault();
-    }
-    console.log(key, event);
-    if (isNaN(key) || event.key===null) {
-      console.log('not numeric');
-      return false;
-    }
-    else {
-      console.log("is numeric")
-    }
+  window.springConfigForm.addEventListener('submit', function(event){
+    // Stop the browser trying to submit the form itself.
+    event.preventDefault();
+    console.log($("#totalDias").val());
+    console.log($("#inicioSprint").val());
+    // return t.set('card', 'shared', 'pontuacao', pontuacao)
+    // .then(function(){
+    //   t.closePopup();
+    // });
   });
 } );

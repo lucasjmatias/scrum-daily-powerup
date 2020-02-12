@@ -13,7 +13,7 @@
     <script src="utils.js"></script>
   </head>
   <body style="min-height: 500px;" >
-    <form id="spring-config-container" style="overflow:hidden">
+    <form id="springConfigForm" style="overflow:hidden">
       <div>
         <label for="totalDias">Dias da Sprint</label>
         <input id="totalDias" name="totalDias" type="text">
@@ -21,6 +21,9 @@
       <div>
         <label for="inicioSprint">Início da Sprint</label>
         <input id="inicioSprint" name="inicioSprint" type="text">
+      </div>
+      <div class="button-container">
+        <button type="submit" class="mod-primary"><i class="fas fa-fw fa-save"></i> Salvar</button>
       </div>
     </form>
     <script src="./sprint-config.js"></script>
