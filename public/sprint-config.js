@@ -1,5 +1,5 @@
 $( function() {
-  $("#inicioSprint" ).datepicker();
+  $("#inicioSprint" ).datepicker($.datepicker.regional[ "pt-BR" ]);
   $("#totalDias").on('keydown', function(event){
       // doneInput.addEventListener('keydown', function(event) {
     let key = Number(event.key)
