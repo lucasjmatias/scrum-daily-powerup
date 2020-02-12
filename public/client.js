@@ -25,7 +25,7 @@ TrelloPowerUp.initialize({
           return [{
             icon: BADGE_ICON,
             text: pontuacao ?  done + ' / ' + total : null,
-            color: pontuacao ? null : 'red',
+            color: total === done ? 'green' : done === 0 ? 'red' : 'yellow',
           }];  
         } else {
           return [];
