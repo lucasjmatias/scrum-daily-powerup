@@ -7,6 +7,7 @@ $( function() {
         event.stopPropagation();
         event.preventDefault();
     }
+    console.log(key, event);
     if (isNaN(key) || event.key===null) {
       console.log('not numeric');
       return false;
