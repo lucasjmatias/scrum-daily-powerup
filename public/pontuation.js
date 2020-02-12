@@ -109,7 +109,7 @@ function renderDoneList() {
   showDone.innerText = contDone(pontuacao);
   donelist.innerHTML = "";
   donelist.innerHTML = preparePontuationList(pontuacao.done); 
-  window.scrollBy(0,50);
+  window.scrollBy(0,100);
   // R.map(function(valueKey) {
   //   var day = valueKey[0];
   //   var value = valueKey[1];
