@@ -7,10 +7,8 @@ $( function() {
         event.stopPropagation();
         event.preventDefault();
     }
-    if (event.which === 13 && doneInput.value) {
-      addDone(doneInput.value);
-    }
     if (isNaN(key) || event.key===null) {
+      console.log('not numeric');
       return false;
     }
     else {
