@@ -12,3 +12,7 @@ i.fas {
   right: 1px;
   font-size: 10px;
 }
+
+li.item-done {
+  max-width: 50px;
+}

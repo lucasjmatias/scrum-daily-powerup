@@ -110,7 +110,6 @@ function PaginationInput(data, container, active, extra, executeFirstCall, fnSel
     container.innerHTML = '';
     var component = "";
     component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
-    console.log('offset', offset);
     for (var i = offset; i < (maxItens + offset) && i < data.length; i++) {
       component = component + preparePaginationInputItem(data[i], active) + '\n';
     }

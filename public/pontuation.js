@@ -101,7 +101,7 @@ function renderDoneItensInput() {
 function pontuationPairToList(valueKey) {
   var day = valueKey[0];
   var value = valueKey[1];
-  return '<li class="item-done">Dia ' + day + ': ' + value + '</li>';
+  return '<li class="item-done">Dia ' + day + ': <span class="pull-right">' + value + '</span></li>';
 }
 var preparePontuationList = R.pipe(R.toPairs, R.sortBy(R.pipe(R.prop(0), parseInt)), R.map(pontuationPairToList), R.reduce(concatLn, ''));
 
@@ -109,7 +109,6 @@ function renderDoneList() {
   showDone.innerText = contDone(pontuacao);
   donelist.innerHTML = "";
   donelist.innerHTML = preparePontuationList(pontuacao.done); 
-  window.scrollBy(0,100);
   // R.map(function(valueKey) {
   //   var day = valueKey[0];
   //   var value = valueKey[1];
@@ -130,6 +129,7 @@ function addDone(day, points) {
   pontuacao.done[day] = points;
   renderDoneList();
   renderDoneItensInput();
+  window.scrollBy(0,100);
 }
 
 function deleteItemDone() {
