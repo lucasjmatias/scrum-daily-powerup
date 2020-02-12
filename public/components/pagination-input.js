@@ -23,7 +23,8 @@ function PaginationInput(data, container, active, extra, executeFirstCall, fnSel
     var isRight = max - activeIndex <= sideSize;
     if (isRight) {
       console.log('direita', max - maxItens);
-      return (max - maxItens) || 0; 
+      var offset = max - maxItens;
+      return offset <= 0 ? 0 : offset; 
     }
     console.log('centro');
     return activeIndex - sideSize;
