@@ -1,3 +1,5 @@
+var t = TrelloPowerUp.iframe();
+
 $( function() {
   $("#inicioSprint").datepicker($.datepicker.regional[ "pt-BR" ]);
   $("#springConfigForm").on('submit', function(event){
