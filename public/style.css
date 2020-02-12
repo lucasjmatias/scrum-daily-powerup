@@ -22,7 +22,7 @@ i.fas {
 }
 
 li.item-done {
-  max-width: 100px;
+  width: 120px;
   cursor: pointer;
   margin-bottom: 5px;
   padding-top: 3px;
