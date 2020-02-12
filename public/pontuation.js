@@ -81,18 +81,12 @@ function renderDoneItensInput() {
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
     var pontosDia = pontuacao.done;
-    console.log('pontosDia', pontosDia);
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, currDay, pontosDia, true, function(day) {
-      console.log('dia', day);
       currDay = day;
       var contRestantes = contRemaining(pontuacao);
       var pontosDiaAtual = pontosDia[day] || 0;
       var ate = contRestantes + pontosDiaAtual + 1;
-      console.log('restantes', contRestantes);
       if (ate > 0) {
-        console.log('pontosDiaAtual', pontosDiaAtual);
-        console.log('ate', ate);
-        console.log('reange', R.range(0, ate));
         PaginationInput(R.range(0, ate), doneItensInput, pontosDiaAtual, {}, false, function(points) {
           addDone(day, points);
         });
@@ -104,20 +98,28 @@ function renderDoneItensInput() {
   } 
 }
 
+function pontuationPairToList(valueKey) {
+  var day = valueKey[0];
+  var value = valueKey[1];
+  return '<li class="item-done">Dia ' + day + ': ' + value + '</li>';
+}
+var preparePontuationList = R.pipe(R.toPairs, R.sortBy(R.prop(0)), R.map(pontuationPairToList), R.reduce(concatLn, ''));
+
 function renderDoneList() {
   showDone.innerText = '(' + contDone(pontuacao) + ')';
   donelist.innerHTML = "";
-  donelist.innerHTML = R.map(function(valueKey) {
-    var day = valueKey[0];
-    var value = valueKey[1];
-    return '<li class="item-done">' + value + ' - Dia: ' + day + ' <i class="fas fa-plus-circle"></i><i class="fas fa-minus-circle"></i><i class="fas fa-trash"></i></li>';
-  }, R.toPairs(pontuacao.done)).reduce(concatLn, '');
-  itensDoneDelete(function(item) {
-      item.addEventListener('click', deleteItemDone, false)
-  });
-  itensDoneAdd(function(item) {
-      item.addEventListener('click', addItemDone, false)
-  });
+  donelist.innerHTML = preparePontuationList(pontuacao.done); 
+  // R.map(function(valueKey) {
+  //   var day = valueKey[0];
+  //   var value = valueKey[1];
+  //   return '<li class="item-done">Dia ' + day + ': ' + value + '</li>';
+  // }, R.toPairs(pontuacao.done)).reduce(concatLn, '');
+  // itensDoneDelete(function(item) {
+  //     item.addEventListener('click', deleteItemDone, false)
+  // });
+  // itensDoneAdd(function(item) {
+  //     item.addEventListener('click', addItemDone, false)
+  // });
   itensDoneRemove(function(item) {
       item.addEventListener('click', removeItemDone, false)
   })
