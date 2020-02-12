@@ -80,7 +80,7 @@ function renderDoneItensInput() {
     //   ponto++;
     // }
     // doneItensInput.innerHTML = itensText.reduce(concatLn, '');
-    var pontosDia = pontuacao.done;
+    var pontosDia = cleanData(pontuacao.done);
     PaginationInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], sprintDays, currDay, pontosDia, true, function(day) {
       currDay = day;
       var contRestantes = contRemaining(pontuacao);
@@ -128,6 +128,7 @@ function addDone(day, points) {
   } else {
     pontuacao.done = R.dissoc(day, pontuacao.done);
   }
+  pontuacao.done = cleanData(pontuacao.done);
   renderDoneList();
   renderDoneItensInput();
   // window.scrollTo(0,document.body.scrollHeight);
@@ -167,6 +168,7 @@ function prepareEvents() {
 window.estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
+  pontuacao.done = cleanData(pontuacao.done);
   return t.set('card', 'shared', 'pontuacao', pontuacao)
   .then(function(){
     t.closePopup();

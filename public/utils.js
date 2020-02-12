@@ -27,3 +27,5 @@ function contDone(pontuacao) {
 function contRemaining(pontuacao) {
   return parseInt(pontuacao.total) - contDone(pontuacao);
 }
+
+var cleanData = R.reject(R.either(R.isEmpty, R.isNil));
