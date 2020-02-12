@@ -101,7 +101,7 @@ function renderDoneItensInput() {
 function pontuationPairToList(valueKey) {
   var day = valueKey[0];
   var value = valueKey[1];
-  return '<li class="item-done" data-day="' + day + '">Dia ' + day + ': <span class="pull-right">' + value + '</span></li>';
+  return '<li class="item-done" data-day="' + day + '">Dia ' + day + ': <span class="item-done__points pull-right">' + value + '</span></li>';
 }
 var preparePontuationList = R.pipe(R.toPairs, R.sortBy(R.pipe(R.prop(0), parseInt)), R.map(pontuationPairToList), R.reduce(concatLn, ''));
 
