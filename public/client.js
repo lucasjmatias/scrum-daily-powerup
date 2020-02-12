@@ -19,27 +19,39 @@ TrelloPowerUp.initialize({
   'card-badges': function(t, options) {
     return t.get('card', 'shared', 'pontuacao')
       .then(function(pontuacao) {
-        return [{
-          icon: pontuacao ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
-          text: pontuacao ? pontuacao.total : 'No Estimate!',
-          color: pontuacao ? null : 'red',
-        }];  
+        if (pontuacao) {
+          var total = pontuacao.total;
+          var done = contDone(pontuacao);
+          return [{
+            icon: pontuacao ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
+            text: pontuacao ?  done + ' / ' + total : null,
+            color: pontuacao ? null : 'red',
+          }];  
+        } else {
+          return [];
+        }
       });
   },
   'card-detail-badges': function(t, options) {
     return t.get('card', 'shared', 'pontuacao')
     .then(function(pontuacao) {
-      return [{
-        title: 'Estimate',
-        text: pontuacao ? pontuacao.total : 'No Estimate!',
-        color: pontuacao ? null : 'red',
-        callback: function(t) {
-          return t.popup({
-            title: "Pontuação",
-            url: 'pontuation.html',
-          });
-        }
-      }]
+      if (pontuacao) {
+        var total = pontuacao.total;
+        var done = contDone(pontuacao);
+        return [{
+          title: 'Estimate',
+          text: pontuacao ?  done + ' / ' + total : null,
+          color: pontuacao ? null : 'red',
+          callback: function(t) {
+            return t.popup({
+              title: "Pontuação",
+              url: 'pontuation.html',
+            });
+          }
+        }]
+      } else {
+        return [];
+      }
     });
   }
 });
