@@ -23,7 +23,7 @@ TrelloPowerUp.initialize({
           var total = pontuacao.total;
           var done = contDone(pontuacao);
           return [{
-            icon: pontuacao ? GREY_ROCKET_ICON : WHITE_ROCKET_ICON,
+            icon: '<i class="fas fa-fw fa-pencil"></i>',
             text: pontuacao ?  done + ' / ' + total : null,
             color: pontuacao ? null : 'red',
           }];  
