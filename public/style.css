@@ -17,6 +17,7 @@ li.item-done {
   max-width: 100px;
   cursor: pointer;
   margin-bottom: 5px;
+  padding-top: 5px;
   border-bottom: 1px solid #333;
 }
 
