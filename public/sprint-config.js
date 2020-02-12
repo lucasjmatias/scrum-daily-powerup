@@ -15,5 +15,5 @@ $( function() {
     else {
       console.log("is numeric")
     }
-  }, false);
+  });
 } );
