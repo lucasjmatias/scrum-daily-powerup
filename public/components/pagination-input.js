@@ -6,7 +6,7 @@ function PaginationInput(data, container, active, extra, executeFirstCall, fnSel
     var isActive = active === item;
     var activeClass = isActive ? 'active' : '';
     var extraTxt = extra[item] ? ' <span class="page-item__extra">' + extra[item] + '</span>' : '' ;
-    return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link" href="#">' + item + extraTxt + '</a></li>'; 
+    return '<li data-value="' + item  +  '" class="page-item value-item ' + activeClass + '"><a class="page-link">' + item + extraTxt + '</a></li>'; 
   }
 
   function calculatePaginationOffset(active, maxItens) {
@@ -109,11 +109,11 @@ function PaginationInput(data, container, active, extra, executeFirstCall, fnSel
 
     container.innerHTML = '';
     var component = "";
-    component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>'
+    component = component +  '<nav> <ul class="pagination"> <li class="page-item ' + (paginationInputIsFirst(active) ? 'disabled' : '') + '"><a class="page-link"><i class="fas fa-chevron-left"></i></a></li>'
     for (var i = offset; i < (maxItens + offset) && i < data.length; i++) {
       component = component + preparePaginationInputItem(data[i], active) + '\n';
     }
-    component = component +  '<li class="page-item ' + (paginationInputIsLast(active) ? 'disabled' : '') + '"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
+    component = component +  '<li class="page-item ' + (paginationInputIsLast(active) ? 'disabled' : '') + '"><a class="page-link" ><i class="fas fa-chevron-right"></i></a></li></ul></nav>'
     container.innerHTML = component;
     applyToElements(container.querySelectorAll('.page-item.value-item'), function(elm) {
       elm.addEventListener('click', paginationInputItemSelectEventWithData, false);
