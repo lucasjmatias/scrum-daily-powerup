@@ -1,7 +1,7 @@
 var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
 var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
 
-console.log(R);
+var BADGE_ICON = './img/ballot-check-regular.svg';
 
 TrelloPowerUp.initialize({
   'card-buttons': function(t, options){
@@ -23,7 +23,7 @@ TrelloPowerUp.initialize({
           var total = pontuacao.total;
           var done = contDone(pontuacao);
           return [{
-            icon: '<i class="fas fa-fw fa-pencil"></i>',
+            icon: BADGE_ICON,
             text: pontuacao ?  done + ' / ' + total : null,
             color: pontuacao ? null : 'red',
           }];  
