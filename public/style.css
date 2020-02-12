@@ -28,3 +28,7 @@ li.item-done {
 .item-done__points {
   font-weight: bold;
 }
+
+.button-container {
+  text-align: right;
+}
