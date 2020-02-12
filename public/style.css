@@ -14,5 +14,6 @@ i.fas {
 }
 
 li.item-done {
-  max-width: 50px;
+  max-width: 100px;
+  font-weight: bold;
 }

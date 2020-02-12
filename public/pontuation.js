@@ -11,8 +11,8 @@ function itensDoneAdd(applyAll) {
   return applyToElements(elementsBySelector('.item-done > i.fa-plus-circle'), applyAll);
 }
 
-function itensDoneRemove(applyAll) {
-  return applyToElements(elementsBySelector('.item-done > i.fa-minus-circle'), applyAll);
+function itensDone(applyAll) {
+  return applyToElements(elementsBySelector('li.item-done'), applyAll);
 }
 
 var itensTotal = elementsByClass('item-total');
@@ -101,28 +101,25 @@ function renderDoneItensInput() {
 function pontuationPairToList(valueKey) {
   var day = valueKey[0];
   var value = valueKey[1];
-  return '<li class="item-done">Dia ' + day + ': <span class="pull-right">' + value + '</span></li>';
+  return '<li class="item-done" data-day="' + day + '">Dia ' + day + ': <span class="pull-right">' + value + '</span></li>';
 }
 var preparePontuationList = R.pipe(R.toPairs, R.sortBy(R.pipe(R.prop(0), parseInt)), R.map(pontuationPairToList), R.reduce(concatLn, ''));
 
 function renderDoneList() {
   showDone.innerText = contDone(pontuacao);
+  itensDone(function(item) {
+      item.removeEventListener('click', selectDone, false)
+  })
   donelist.innerHTML = "";
   donelist.innerHTML = preparePontuationList(pontuacao.done); 
-  // R.map(function(valueKey) {
-  //   var day = valueKey[0];
-  //   var value = valueKey[1];
-  //   return '<li class="item-done">Dia ' + day + ': ' + value + '</li>';
-  // }, R.toPairs(pontuacao.done)).reduce(concatLn, '');
-  // itensDoneDelete(function(item) {
-  //     item.addEventListener('click', deleteItemDone, false)
-  // });
-  // itensDoneAdd(function(item) {
-  //     item.addEventListener('click', addItemDone, false)
-  // });
-  itensDoneRemove(function(item) {
-      item.addEventListener('click', removeItemDone, false)
+  itensDone(function(item) {
+      item.addEventListener('click', selectDone, false)
   })
+}
+
+function selectDone() {
+  currDay = parseInt(this.getAttribute('data-day'));
+  renderDoneItensInput();
 }
 
 function addDone(day, points) {
@@ -130,18 +127,6 @@ function addDone(day, points) {
   renderDoneList();
   renderDoneItensInput();
   window.scrollBy(0,100);
-}
-
-function deleteItemDone() {
-  
-}
-
-function addItemDone() {
-  
-}
-
-function removeItemDone() {
-  
 }
 
 function toggleEditTotal() {
