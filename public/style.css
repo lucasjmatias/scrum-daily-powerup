@@ -40,3 +40,7 @@ li.item-done:hover {
 .button-container {
   text-align: right;
 }
+
+#sprint-days-container, #done-itens-input-container, #done-list-container {
+  text-align: center;
+}
