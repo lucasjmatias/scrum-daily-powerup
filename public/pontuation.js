@@ -106,9 +106,10 @@ function pontuationPairToList(valueKey) {
 var preparePontuationList = R.pipe(R.toPairs, R.sortBy(R.prop(0)), R.map(pontuationPairToList), R.reduce(concatLn, ''));
 
 function renderDoneList() {
-  showDone.innerText = '(' + contDone(pontuacao) + ')';
+  showDone.innerText = contDone(pontuacao);
   donelist.innerHTML = "";
   donelist.innerHTML = preparePontuationList(pontuacao.done); 
+  window.scrollBy(0,50);
   // R.map(function(valueKey) {
   //   var day = valueKey[0];
   //   var value = valueKey[1];
