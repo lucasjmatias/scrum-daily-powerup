@@ -29,6 +29,10 @@ li.item-done {
   border-bottom: 1px solid #333;
 }
 
+li.item-done:hover {
+  background-color: rgba(9,30,66,.08);
+}
+
 .item-done__points {
   font-weight: bold;
 }
