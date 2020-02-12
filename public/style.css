@@ -20,6 +20,6 @@ li.item-done {
   border-bottom: 1px solid #333;
 }
 
-li.item-done__points {
+.item-done__points {
   font-weight: bold;
 }
