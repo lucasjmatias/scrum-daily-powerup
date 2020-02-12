@@ -188,7 +188,7 @@ t.render(function(){
         sprintTotalDays = sprint.dias;
         var today = moment();
         var inicio = moment(sprint.inicio, 'DD/MM/YYYY', true);
-        currDay = today.diff(inicio, 'days') + 1;
+        currDay = today.diff(inicio, 'days') + 1 - contWeekendDays(inicio, today);
         renderItensTotal();
     });
   })

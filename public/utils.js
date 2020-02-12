@@ -28,4 +28,20 @@ function contRemaining(pontuacao) {
   return parseInt(pontuacao.total) - contDone(pontuacao);
 }
 
+function contWeekendDays(begin, end) {
+  var weekendDays = 0;
+  if (begin.isAfter(end)){
+    return weekendDays;
+  }
+  var beginW = begin.clone();
+  while (beginW.isSameOrBefore(end)) {
+    var isoWeekDay = beginW.isoWeekday();
+    if (isoWeekDay === 6 || isoWeekDay === 7) {
+      weekendDays++;
+    }
+    beginW.add(1, 'days');
+  }
+  return weekendDays;
+}
+
 var cleanData = R.reject(R.either(R.isEmpty, R.isNil));
