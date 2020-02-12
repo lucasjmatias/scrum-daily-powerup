@@ -20,11 +20,11 @@ TrelloPowerUp.initialize({
     return t.get('card', 'shared', 'pontuacao')
       .then(function(pontuacao) {
         if (pontuacao) {
-          var total = pontuacao.total;
+          var total = parseInt(pontuacao.total);
           var done = contDone(pontuacao);
           return [{
             icon: BADGE_ICON,
-            text: pontuacao ?  done + ' / ' + total : null,
+            text: total === done ? done : done + ' / ' + total,
             color: total === done ? 'green' : done === 0 ? 'red' : 'yellow',
           }];  
         } else {
@@ -36,7 +36,7 @@ TrelloPowerUp.initialize({
     return t.get('card', 'shared', 'pontuacao')
     .then(function(pontuacao) {
       if (pontuacao) {
-        var total = pontuacao.total;
+        var total = parseInt(pontuacao.total);
         var done = contDone(pontuacao);
         return [{
           title: 'Estimate',
