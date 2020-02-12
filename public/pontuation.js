@@ -123,7 +123,11 @@ function selectDone() {
 }
 
 function addDone(day, points) {
-  pontuacao.done[day] = points;
+  if (points > 0) {
+    pontuacao.done[day] = points;
+  } else {
+    pontuacao.done = R.dissoc(day, pontuacao.done);
+  }
   renderDoneList();
   renderDoneItensInput();
   window.scrollBy(0,100);
