@@ -12,15 +12,20 @@ function PaginationInput(data, container, active, extra, executeFirstCall, fnSel
   function calculatePaginationOffset(active, maxItens) {
     var sideSize = Math.floor(maxItens/2);
     var activeIndex = paginationInputActiveIndex(active);
+    console.log('activeIndex', activeIndex);
     var max = data.length;
+    console.log('max', max);
     var isLeft = activeIndex < sideSize;
     if (isLeft) {
+      console.log('esquerda', 0);
       return 0;
     }
     var isRight = max - activeIndex <= sideSize;
     if (isRight) {
-      return max - maxItens; 
+      console.log('direita', max - maxItens);
+      return (max - maxItens) || 0; 
     }
+    console.log('centro');
     return activeIndex - sideSize;
   }
 
