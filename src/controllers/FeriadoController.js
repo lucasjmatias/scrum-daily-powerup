@@ -21,7 +21,7 @@ exports.get = (req, res, next) => {
       }
     })
     .then(response => {
-      res.status(201).send(response);
+      res.status(201).send(response.data);
     })
     .catch(({message}) => res.status(502).json({message}));
 };
