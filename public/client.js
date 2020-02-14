@@ -70,10 +70,7 @@ TrelloPowerUp.initialize({
   },
   'board-buttons': function (t, opts) {
       return [{
-        icon: {
-          dark: BADGE_ICON,
-          light: BADGE_ICON
-        },
+        icon: BADGE_ICON,
         condition: 'always',
         text: "Sprint BRB",
         callback: function (t) {
