@@ -29,8 +29,8 @@ $( function() {
     if (mDate.isValid() && R.is(Number, dias) && !isNaN(dias)) {
       sprint.dias = dias;
       sprint.inicio = dateTxt;
-      var axios = axios.default;
-      return axios.get('/feriados')
+      var ax = axios.default;
+      return ax.get('/feriados')
            .then(function(response) {
               console.log(response.data);
               return t.set('board', 'shared', 'sprint', sprint)

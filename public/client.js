@@ -67,5 +67,24 @@ TrelloPowerUp.initialize({
         }
       }];
     });
+  },
+  'board-buttons': function (t, opts) {
+      return [{
+        icon: {
+          dark: BADGE_ICON,
+          light: BADGE_ICON
+        },
+        condition: 'always',
+        text: "Sprint BRB",
+        callback: function (t) {
+          // Trello will call this if the user clicks on this action
+          // we could for example open a new popover...
+          t.popup({
+            title: "Configuração da Sprint",
+            url: 'sprint-config.html',
+            height: 220 
+          });
+        }
+      }];
   }
 });
