@@ -1,11 +1,11 @@
 const axios = require('axios').default;
 
-const baseURL = 'https://api.calendario.com.br'; 
+const baseURL = 'api.calendario.com.br'; 
 const estado = 'DF';
 const token = 'bHVjYXMubWF0aWFzLjg3QGdtYWlsLmNvbSZoYXNoPTk5NjM0MDY1';
 
 exports.get = (req, res, next) => {
-  const ano = req.params.ano;
+  const ano = req.query.ano || 2020;
 
   const calendarAxios = axios.create({
     baseURL
@@ -23,5 +23,5 @@ exports.get = (req, res, next) => {
     .then(response => {
       res.status(201).json(response);
     })
-    .catch(err => res.status(502).json({err}));
+    .catch(({message}) => res.status(502).json({message}));
 };
