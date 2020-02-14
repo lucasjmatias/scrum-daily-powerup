@@ -186,7 +186,7 @@ t.render(function(){
     t.get('board', 'shared', 'sprint')
     .then(function(sprint) {
         sprintTotalDays = sprint.dias;
-        var today = moment();
+        var today = moment('2020-02-27');
         var inicio = moment(sprint.inicio, 'DD/MM/YYYY', true);
         currDay = today.diff(inicio, 'days') + 1 - contWeekendDays(inicio, today, sprint.feriados);
         renderItensTotal();
