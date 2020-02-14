@@ -28,18 +28,27 @@ function contRemaining(pontuacao) {
   return parseInt(pontuacao.total) - contDone(pontuacao);
 }
 
-function contWeekendDays(begin, end) {
+var prepareHolidays = R.map(function(holiday) {return moment(holiday, 'DD/MM/YYYY')});
+
+var isHoliday = function(dateRef){
+  return function(holiday) {
+    return dateRef.isSame(holiday, 'day');
+  }
+};
+
+function contWeekendDays(begin, end, holidays) {
+  var preparedHolidays = prepareHolidays(holidays);
   var weekendDays = 0;
   if (begin.isAfter(end)){
     return weekendDays;
   }
-  var beginW = begin.clone();
-  while (beginW.isSameOrBefore(end)) {
-    var isoWeekDay = beginW.isoWeekday();
-    if (isoWeekDay === 6 || isoWeekDay === 7) {
+  var currentDay = begin.clone();
+  while (currentDay.isSameOrBefore(end)) {
+    var isoWeekDay = currentDay.isoWeekday();
+    if (isoWeekDay === 6 || isoWeekDay === 7 || R.any(isHoliday(currentDay), preparedHolidays)) {
       weekendDays++;
     }
-    beginW.add(1, 'days');
+    currentDay.add(1, 'days');
   }
   return weekendDays;
 }
