@@ -1,3 +1,5 @@
+import Axios from "axios";
+
 var t = TrelloPowerUp.iframe();
 
 var sprint = {
@@ -25,13 +27,19 @@ $( function() {
     var dateTxt = $("#inicioSprint").val(); 
     var dias = parseInt($("#totalDias").val()); 
     var mDate =  moment(dateTxt, "DD/MM/YYYY", true);
+
     if (mDate.isValid() && R.is(Number, dias) && !isNaN(dias)) {
       sprint.dias = dias;
       sprint.inicio = dateTxt;
-      return t.set('board', 'shared', 'sprint', sprint)
-          .then(function(){
-            t.closePopup();
-          });
+      var axios = axios.default;
+      return axios.get('/feriados')
+           .then(function(response) {
+              console.log(response.data);
+              return t.set('board', 'shared', 'sprint', sprint)
+                  .then(function(){
+                    t.closePopup();
+                  });
+           });
     }
   });
 } );
