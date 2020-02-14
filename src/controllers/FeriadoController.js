@@ -5,7 +5,7 @@ const estado = 'DF';
 const token = 'bHVjYXMubWF0aWFzLjg3QGdtYWlsLmNvbSZoYXNoPTk5NjM0MDY1';
 
 exports.get = (req, res, next) => {
-  const ano = req.query.ano || 2020;
+  const ano = req.query.ano || new Date().getFullYear();
 
   const calendarAxios = axios.create({
     baseURL

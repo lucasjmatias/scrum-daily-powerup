@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 var t = TrelloPowerUp.iframe();
 
 var sprint = {
