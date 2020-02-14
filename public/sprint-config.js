@@ -30,9 +30,9 @@ $( function() {
       sprint.dias = dias;
       sprint.inicio = dateTxt;
       var ax = axios.default;
-      return ax.get('/feriados')
+      return ax.get('/feriados', {params: {ano: mDate.format('YYYY')}})
            .then(function(response) {
-              console.log(response.data);
+              sprint.feriados = response.data;
               return t.set('board', 'shared', 'sprint', sprint)
                   .then(function(){
                     t.closePopup();
