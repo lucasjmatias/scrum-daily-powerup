@@ -85,7 +85,7 @@ function recuperarDadosKanban(boardID, boardName) {
 		limparCampos();
 		
 		// Carrega os objetos do trello
-		carregarBoard(boardId);
+		carregarBoard(boardID);
 		carregarListas(boardID);
 		carregarCartoes();
 		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto))(cartoesSprint);
