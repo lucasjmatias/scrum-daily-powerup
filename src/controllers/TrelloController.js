@@ -1,9 +1,11 @@
 const axios = require('axios').default;
+const {sum, values, defaultTo, prop, pipe, map} = require('ramda')
 
 const baseURL = 'https://api.trello.com/1/'; 
 const key = process.env.TRELLO_KEY;
 const token = process.env.TRELLO_TOKEN;
 const scrumPluginId = '5e3aa7e26848e22777cdf137';
+const contDone = pipe(sum(values(prop('done'))), defaultTo(0));
 
 const trelloAxios = axios.create({
   baseURL
@@ -103,7 +105,25 @@ exports.getCards = (req, res, next) => {
       }
     })
     .then(({data}) => {
-      res.status(201).json(data);
+      const preparedCards = map(({pluginData, ...others}) => {
+        let total = 0;
+        let totalFeito = 0;
+        let feitoPorDia = {}; 
+        const scrumData = pluginData.find(pd => pd.idPlugin === scrumPluginId);
+        if (scrumData) {
+          const {pontuacao} = JSON.parse(scrumData.value);
+          total = pontuacao.total;
+          totalFeito = contDone(pontuacao.done);
+          feitoPorDia = pontuacao.done;
+        }
+        return {
+          total,
+          totalFeito,
+          feitoPorDia,
+          ...others,
+        }
+      }, data);
+      res.status(201).json(preparedCards);
     })
     .catch(({message}) => res.status(502).json({message}));
 };

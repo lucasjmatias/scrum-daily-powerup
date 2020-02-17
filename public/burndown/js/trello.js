@@ -1,7 +1,12 @@
-var listas
-var cartoesSprint
-var cartoesFazendo
-var cartoesPronto
+var listas;
+var cartoesSprint;
+var cartoesFazendo;
+var cartoesPronto;
+var boardSprint;
+
+function setBoard(board) {
+	boardSprint = board;
+}
 
 function setListas(lista) {	
 	listas = lista;
@@ -46,6 +51,11 @@ function carregarCartoesPorLista(idList, callback) {
 	carregarDadosTrello(urlGetCards, callback);
 }
 
+function carregarBoard(boardId) {
+	var urlGetBoard = "trello/boards/" + boardId;
+	carregarDadosTrello(urlGetBoard, setBoard);
+}
+
 function carregarListas(boardID) {
 	var urlGetLists = "trello/boards/" + boardID + "/lists";
 	carregarDadosTrello(urlGetLists, setListas);
@@ -75,14 +85,15 @@ function recuperarDadosKanban(boardID, boardName) {
 		limparCampos();
 		
 		// Carrega os objetos do trello
+		carregarBoard(boardId);
 		carregarListas(boardID);
 		carregarCartoes();
 		var retorno = {
 					"sistema": boardName,
-					"sprint": recuperarNumeroSprint(),
+					"sprint": board.numeroSprint,
 					"pontos": recuperarTotalPontosSprint(),
-					"dias": recuperarDiasSprint(),
-					"realizados":recuperarTotalPontosFeitos()//[38, 30.5, 27]
+					"dias": board.dias,
+					"realizados": recuperarTotalPontosFeitos()//[38, 30.5, 27]
 					}
 					
 		return retorno;
@@ -132,38 +143,6 @@ function recuperaListaSprint() {
 	}
 	
 	return listaSprint[0];
-}
-
-function recuperarNumeroSprint(){
-	var listaSprint = recuperaListaSprint(listaSprint);
-
-	var numeroSprint = listaSprint.name.match(new RegExp("\\((\\d*?)\\)","g"));
-	
-	if (numeroSprint == null) {
-		alert("Defina um número de sprint entre ().");
-	}
-	
-	if (numeroSprint.length > 1) {
-		alert("Defina apenas um número de sprint entre ().");
-	}
-
-	return numeroSprint[0].replace("(", "").replace(")", "");
-}
-
-function recuperarDiasSprint(){
-	var listaSprint = recuperaListaSprint(listaSprint);
-
-	var diasSprint = listaSprint.name.match(new RegExp("\\[(\\d*?)\\]","g"));
-	
-	if (diasSprint == null) {
-		alert("Defina a quantidade de dias da sprint entre [].");
-	}
-	
-	if (diasSprint.length > 1) {
-		alert("Defina apenas uma quantidade de dias da sprint entre [].");
-	}
-
-	return diasSprint[0].replace("[", "").replace("]", "");
 }
 
 function recuperarTotalPontosFeitos(){

@@ -62,7 +62,7 @@ TrelloPowerUp.initialize({
           t.popup({
             title: "Configuração da Sprint",
             url: 'sprint-config.html',
-            height: 220 
+            height: 270 
           });
         }
       }];
@@ -79,7 +79,7 @@ TrelloPowerUp.initialize({
           t.popup({
             title: "Configuração da Sprint",
             url: 'sprint-config.html',
-            height: 220 
+            height: 270 
           });
         }
       }];
