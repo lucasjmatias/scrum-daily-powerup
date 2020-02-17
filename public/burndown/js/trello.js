@@ -89,8 +89,11 @@ function recuperarDadosKanban(boardID, boardName) {
 		carregarListas(boardID);
 		carregarCartoes();
 		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto))(cartoesSprint);
+		console.log('todosCartoes', todosCartoes);
 		var contarPontosTotaisCartoes = R.pipe(R.prop('total'), R.sum, R.defaultTo(0));
+		console.log('contarPontosTotaisCartoes', contarPontosTotaisCartoes);
 		var totalPontos = contarPontosTotaisCartoes(todosCartoes);
+		console.log('totalPontos', totalPontos);
 		var retorno = {
 					"sistema": boardName,
 					"sprint": board.numeroSprint,
