@@ -88,18 +88,38 @@ function recuperarDadosKanban(boardID, boardName) {
 		carregarBoard(boardId);
 		carregarListas(boardID);
 		carregarCartoes();
+		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto))(cartoesSprint);
+		var contarPontosTotaisCartoes = R.pipe(R.prop('total'), R.sum, R.defaultTo(0));
+		var totalPontos = contarPontosTotaisCartoes(todosCartoes);
 		var retorno = {
 					"sistema": boardName,
 					"sprint": board.numeroSprint,
-					"pontos": recuperarTotalPontosSprint(),
+					"pontos": totalPontos, //recuperarTotalPontosSprint(),
 					"dias": board.dias,
-					"realizados": recuperarTotalPontosFeitos()//[38, 30.5, 27]
+					"realizados": recuperarTotalPontosFeitos(todosCartoes, totalPontos)//[38, 30.5, 27]
 					}
 					
 		return retorno;
 	} else {
 		return null;
 	}
+}
+
+function recuperarTotalPontosFeitos(todosCartoes, totalPontos) {
+	var feitosNoDia = R.repeat(0, board.dias);
+	R.forEach(function(cartao) {
+			R.forEachObjIndexed(function(pontos, dia) {
+				feitosNoDia[dia] += pontos;
+			}, cartao.feitoPorDia);
+		},
+		todosCartoes
+	);
+
+	var feitosNoDiaNeg = R.map(R.negate, feitosNoDia); //Negativo pois é o que foi 'usado' do total
+
+	var acumulador = function(a, b){ return [a + b, a + b] };
+	var pegarArrAcumulado = R.prop(1);
+	return pegarArrAcumulado(R.mapAccum(acumulador, totalPontos, feitosNoDiaNeg));
 }
 
 function recuperarListaFazendo() {
@@ -143,96 +163,4 @@ function recuperaListaSprint() {
 	}
 	
 	return listaSprint[0];
-}
-
-function recuperarTotalPontosFeitos(){
-	var pontosFeitos = [recuperarTotalPontosSprint()];
-
-	// Executa para cada cartão na lista Fazendo
-	for(i = 0;i < cartoesFazendo.length;i++) {
-		// Extrai os pontos do nome do cartão no formato [d:p]
-		var pontos = cartoesFazendo[i].name.match(new RegExp("\\[(.*?)\\]","g"));
-
-		if (pontos != null) {
-			// Executa para cada cartão que foi filtrado
-			for(k = 0; k < pontos.length;k++) {
-				// Recupera a anotação [d:p] onde d é o dia e p é o ponto
-				pontosCartao = pontos[k].replace("[","").replace("]","").split(',')
-				for(p = 0; p < pontosCartao.length; p++) {
-					//console.log(pontosCartao[p].split(':')[1]);
-					if (pontosFeitos[pontosCartao[p].split(':')[0]] == null) {
-						pontosFeitos[pontosCartao[p].split(':')[0]] = 0;
-					}
-					pontosFeitos[pontosCartao[p].split(':')[0]] += +pontosCartao[p].split(':')[1];
-				}
-				
-			}
-		}
-	}
-	
-	// Executa para cada cartão na lista Pronto
-	for(i = 0;i < cartoesPronto.length;i++) {
-		// Extrai os pontos do nome do cartão no formato [d:p]
-		var pontos = cartoesPronto[i].name.match(new RegExp("\\[(.*?)\\]","g"));
-
-		if (pontos != null) {
-			// Executa para cada cartão que foi filtrado
-			for(k = 0; k < pontos.length;k++) {
-				// Recupera a anotação [d:p] onde d é o dia e p é o ponto
-				pontosCartao = pontos[k].replace("[","").replace("]","").split(',')
-				for(p = 0; p < pontosCartao.length; p++) {
-					//console.log(pontosCartao[p].split(':')[1]);
-					if (pontosFeitos[pontosCartao[p].split(':')[0]] == null) {
-						pontosFeitos[pontosCartao[p].split(':')[0]] = 0;
-					}
-					pontosFeitos[pontosCartao[p].split(':')[0]] += +pontosCartao[p].split(':')[1];
-				}
-				
-			}
-		}
-	}
-
-	/*for(i = 0;i < cartoesPronto.length;i++) {
-		var pontos = cartoesPronto[i].name.match(new RegExp("\\((\\d*?)\\)","g"));
-		if (pontos != null){
-			total += +pontos[0].replace("(", "").replace(")", "");
-		}
-	}*/
-	console.log(pontosFeitos);
-	for(t = 0; t < pontosFeitos.length-1; t++) {
-		if (pontosFeitos[t+1] == null) {			
-			pontosFeitos[t+1] = pontosFeitos[t];
-		} else {
-			pontosFeitos[t+1] = (pontosFeitos[t] - pontosFeitos[t+1]);
-		}
-	}
-
-	return pontosFeitos;
-}
-
-function recuperarTotalPontosSprint(){
-	var total = 0;
-
-	for(i = 0;i < cartoesSprint.length;i++) {
-		var pontos = cartoesSprint[i].name.match(new RegExp("\\((\\d*?)\\)","g"));
-		if (pontos != null){
-			total += +pontos[0].replace("(", "").replace(")", "");
-		}
-	}
-
-	for(i = 0;i < cartoesFazendo.length;i++) {
-		var pontos = cartoesFazendo[i].name.match(new RegExp("\\((\\d*?)\\)","g"));
-		if (pontos != null){
-			total += +pontos[0].replace("(", "").replace(")", "");
-		}
-	}
-
-	for(i = 0;i < cartoesPronto.length;i++) {
-		var pontos = cartoesPronto[i].name.match(new RegExp("\\((\\d*?)\\)","g"));
-		if (pontos != null){
-			total += +pontos[0].replace("(", "").replace(")", "");
-		}
-	}
-
-	return total;
 }
