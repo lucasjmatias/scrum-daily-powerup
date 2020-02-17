@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="select-container" class="form-group">
-		<select id="projetos" class="form-control" onchange="criarGrafico(recuperarDadosKanban($(this).val(), $(this).text()));"></select>
+		<select id="projetos" class="form-control" onchange="criarGrafico(recuperarDadosKanban($('#projetos').val(), $('#projetos').text()));"></select>
 	</div>
 	<div id="burndown"></div>
 	<script>
