@@ -96,9 +96,9 @@ function recuperarDadosKanban(boardID, boardName) {
 		console.log('totalPontos', totalPontos);
 		var retorno = {
 					"sistema": boardName,
-					"sprint": board.numeroSprint,
+					"sprint": boardSprint.numeroSprint,
 					"pontos": totalPontos, //recuperarTotalPontosSprint(),
-					"dias": board.dias,
+					"dias": boardSprint.dias,
 					"realizados": recuperarTotalPontosFeitos(todosCartoes, totalPontos)//[38, 30.5, 27]
 					}
 					
@@ -109,7 +109,7 @@ function recuperarDadosKanban(boardID, boardName) {
 }
 
 function recuperarTotalPontosFeitos(todosCartoes, totalPontos) {
-	var feitosNoDia = R.repeat(0, board.dias);
+	var feitosNoDia = R.repeat(0, boardSprint.dias);
 	R.forEach(function(cartao) {
 			R.forEachObjIndexed(function(pontos, dia) {
 				feitosNoDia[dia] += pontos;
