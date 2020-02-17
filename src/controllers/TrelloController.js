@@ -23,22 +23,8 @@ exports.getBoards = (req, res, next) => {
         token
       }
     })
-    .then(({data: {pluginData, ...others}}) => {
-      const scrumData = pluginData.find(pd => pd.idPlugin === scrumPluginId);
-      let dias = 0;
-      let inicio = '';
-      if (scrumData) {
-        const sprint = JSON.parse(scrumData.sprint);
-        dias = sprint.dias;
-        inicio = sprint.inicio;
-      }
-
-      const boardData = {
-        dias,
-        inicio,
-        ...others
-      }
-      res.status(201).json(boardData);
+    .then(({data}) => {
+      res.status(201).json(data);
     })
     .catch(({message}) => res.status(502).json({message}));
 };
@@ -57,8 +43,22 @@ exports.getBoard = (req, res, next) => {
         token
       }
     })
-    .then(({data}) => {
-      res.status(201).json(data);
+    .then(({data: {pluginData, ...others}}) => {
+      const scrumData = pluginData.find(pd => pd.idPlugin === scrumPluginId);
+      let dias = 0;
+      let inicio = '';
+      if (scrumData) {
+        const sprint = JSON.parse(scrumData.sprint);
+        dias = sprint.dias;
+        inicio = sprint.inicio;
+      }
+
+      const boardData = {
+        dias,
+        inicio,
+        ...others
+      }
+      res.status(201).json(boardData);
     })
     .catch(({message}) => res.status(502).json({message}));
 };
