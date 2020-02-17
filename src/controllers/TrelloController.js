@@ -5,7 +5,8 @@ const baseURL = 'https://api.trello.com/1/';
 const key = process.env.TRELLO_KEY;
 const token = process.env.TRELLO_TOKEN;
 const scrumPluginId = '5e3aa7e26848e22777cdf137';
-const contDone = pipe(sum(values(prop('done'))), defaultTo(0));
+
+const contDone = pipe(prop('done'), values, sum, defaultTo(0));
 
 const trelloAxios = axios.create({
   baseURL
@@ -113,7 +114,7 @@ exports.getCards = (req, res, next) => {
         if (scrumData) {
           const {pontuacao} = JSON.parse(scrumData.value);
           total = pontuacao.total;
-          totalFeito = contDone(pontuacao.done);
+          totalFeito = contDone(pontuacao);
           feitoPorDia = pontuacao.done;
         }
         return {
