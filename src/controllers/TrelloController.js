@@ -48,7 +48,7 @@ exports.getBoard = (req, res, next) => {
       let dias = 0;
       let inicio = '';
       if (scrumData) {
-        const sprint = JSON.parse(scrumData.sprint);
+        const {sprint} = JSON.parse(scrumData.value);
         dias = sprint.dias;
         inicio = sprint.inicio;
       }
