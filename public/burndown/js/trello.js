@@ -25,7 +25,7 @@ function setCartoesPronto(cartoes) {
 }
 
 function popularBoards(combo) {	
-	var urlGetBoards = "trello/boards";
+	var urlGetBoards = "/trello/boards";
 	$.getJSON(urlGetBoards, function(data){
 		$('#' + combo).empty();
 		$('#' + combo).append('<option value="0">Selecione</option>');
@@ -47,17 +47,17 @@ function carregarDadosTrello(url, callback) {
 }
 
 function carregarCartoesPorLista(idList, callback) {
-	var urlGetCards = "trello/lists/" + idList + "/cards";
+	var urlGetCards = "/trello/lists/" + idList + "/cards";
 	carregarDadosTrello(urlGetCards, callback);
 }
 
 function carregarBoard(boardId) {
-	var urlGetBoard = "trello/boards/" + boardId;
+	var urlGetBoard = "/trello/boards/" + boardId;
 	carregarDadosTrello(urlGetBoard, setBoard);
 }
 
 function carregarListas(boardID) {
-	var urlGetLists = "trello/boards/" + boardID + "/lists";
+	var urlGetLists = "/trello/boards/" + boardID + "/lists";
 	carregarDadosTrello(urlGetLists, setListas);
 }
 
