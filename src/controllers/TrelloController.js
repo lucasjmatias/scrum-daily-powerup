@@ -45,15 +45,18 @@ exports.getBoard = (req, res, next) => {
     })
     .then(({data: {pluginData, ...others}}) => {
       const scrumData = pluginData.find(pd => pd.idPlugin === scrumPluginId);
+      let numeroSprint = 0;
       let dias = 0;
       let inicio = '';
       if (scrumData) {
         const {sprint} = JSON.parse(scrumData.value);
+        numeroSprint = sprint.numero;
         dias = sprint.dias;
         inicio = sprint.inicio;
       }
 
       const boardData = {
+        numeroSprint,
         dias,
         inicio,
         ...others

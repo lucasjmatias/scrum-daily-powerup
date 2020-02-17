@@ -1,7 +1,3 @@
-const usuarioSistema = "nurea3";
-const key = "d7fc046c3e8825e8d525ecf2f659ff75";
-const token = "9da9b1e4ec5b7f4b8c2d57fd94d78fc40ec549166dc37c4ce7bb311f769d8c1c";
-
 var listas
 var cartoesSprint
 var cartoesFazendo
@@ -24,7 +20,7 @@ function setCartoesPronto(cartoes) {
 }
 
 function popularBoards(combo) {	
-	var urlGetBoards = "https://api.trello.com/1/members/" + usuarioSistema + "/boards?filter=open&fields=name,shortLink&key=" + key +"&token=" + token;
+	var urlGetBoards = "trello/boards";
 	$.getJSON(urlGetBoards, function(data){
 		$('#' + combo).empty();
 		$('#' + combo).append('<option value="0">Selecione</option>');
@@ -36,7 +32,6 @@ function popularBoards(combo) {
 }
 
 function carregarDadosTrello(url, callback) {
-	//$.getJSON(url, callback);
 	$.ajax({ 
 		url: url, 
 		dataType: 'json', 
@@ -46,27 +41,28 @@ function carregarDadosTrello(url, callback) {
 	});
 }
 
+function carregarCartoesPorLista(idList, callback) {
+	var urlGetCards = "trello/lists/" + idList + "/cards";
+	carregarDadosTrello(urlGetCards, callback);
+}
+
 function carregarListas(boardID) {
-	// Carrega as listas
-	var urlGetLists = "https://api.trello.com/1/boards/" + boardID + "/lists?filter=open&fields=all&key=" + key +"&token=" + token;
+	var urlGetLists = "trello/boards/" + boardID + "/lists";
 	carregarDadosTrello(urlGetLists, setListas);
 }
 
 function carregarCartoes() {
 	// Carrega os cartoes da sprint
 	var listaSprint = recuperaListaSprint();
-	var urlGetCards = "https://api.trello.com/1/lists/" + listaSprint.id + "/cards?filter=open&fields=all&key=" + key +"&token=" + token;
-	carregarDadosTrello(urlGetCards, setCartoesSprint);
+	carregarCartoesPorLista(listaSprint.id, setCartoesSprint);
 	
 	// Carrega os cartoes fazendo
 	var listaFazendo = recuperarListaFazendo();
-	var urlGetCards = "https://api.trello.com/1/lists/" + listaFazendo.id + "/cards?filter=open&fields=all&key=" + key +"&token=" + token;
-	carregarDadosTrello(urlGetCards, setCartoesFazendo);
+	carregarCartoesPorLista(listaFazendo.id, setCartoesFazendo);
 	
 	// Carrega os cartoes pronto
 	var listaPronto = recuperarListaPronto();
-	var urlGetCards = "https://api.trello.com/1/lists/" + listaPronto.id + "/cards?filter=open&fields=all&key=" + key +"&token=" + token;
-	carregarDadosTrello(urlGetCards, setCartoesPronto);
+	carregarCartoesPorLista(listaPronto.id, setCartoesPronto);
 }
 
 function limparCampos() {

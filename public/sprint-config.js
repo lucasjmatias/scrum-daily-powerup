@@ -1,6 +1,7 @@
 var t = TrelloPowerUp.iframe();
 
 var sprint = {
+  numero: 1,
   dias: 0,
   inicio: moment().format('DD/MM/YYYY')
 }
@@ -9,6 +10,7 @@ t.render(function(){
   return t.get('board', 'shared', 'sprint')
   .then(function(sprintData){
     sprint = sprintData || sprint;
+    elementById("numeroSprint").value = sprint.numero;
     elementById("totalDias").value = sprint.dias;
     elementById("inicioSprint").value = sprint.inicio;
   })
@@ -23,10 +25,12 @@ $( function() {
     // Stop the browser trying to submit the form itself.
     event.preventDefault();
     var dateTxt = $("#inicioSprint").val(); 
+    var numero = parseInt($("#numeroSprint").val()); 
     var dias = parseInt($("#totalDias").val()); 
     var mDate =  moment(dateTxt, "DD/MM/YYYY", true);
 
-    if (mDate.isValid() && R.is(Number, dias) && !isNaN(dias)) {
+    if (mDate.isValid() && R.is(Number, dias) && !isNaN(dias) && R.is(Number, numero) && !isNaN(numero)) {
+      sprint.numero = numero;
       sprint.dias = dias;
       sprint.inicio = dateTxt;
       var ax = axios.default;
