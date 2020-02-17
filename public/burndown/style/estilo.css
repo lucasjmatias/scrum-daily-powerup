@@ -1,0 +1,18 @@
+#burndown {
+  width: 100%;
+  min-width: 310px; 
+  height: 400px; 
+  margin: 0px 0 0 0;
+}
+
+div.select-container {
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-bottom: 40px;
+	max-width: 150px;
+}
+
+body {
+  background: #ededed !important;
+  font-family: 'Open Sans', sans-serif;
+}

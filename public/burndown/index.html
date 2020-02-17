@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Burndown</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="style/estilo.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/burndow.js"></script>
+	<script src="js/trello.js"></script>
+</head>
+<body>
+	<div class="select-container" class="form-group">
+		<select id="projetos" class="form-control" onchange="criarGrafico(recuperarDadosKanban($(this).children('option:selected'). val(), $(this).children('option:selected'). text()));"></select>
+	</div>
+	<div id="burndown"></div>
+	<script>
+		$(document).ready(function(){
+			var temp= popularBoards("projetos");
+		});
+	</script>
+	
+</body>
+</html>

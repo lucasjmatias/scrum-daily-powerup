@@ -2,7 +2,7 @@ const axios = require('axios').default;
 
 const baseURL = 'https://api.calendario.com.br'; 
 const estado = 'DF';
-const token = 'bHVjYXMubWF0aWFzLjg3QGdtYWlsLmNvbSZoYXNoPTk5NjM0MDY1';
+const token =  process.env.CALENDAR_TOKEN;
 
 exports.get = (req, res, next) => {
   const ano = req.query.ano || new Date().getFullYear();
