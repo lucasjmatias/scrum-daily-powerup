@@ -93,6 +93,7 @@ function renderDoneItensInput() {
         });
       }
     });
+    t.sizeTo('#estimate').done();
     // itensDoneInputApply(function(item) {
     //   item.addEventListener('click', function(){addDone(parseInt(this.innerText), parseInt(sprintSelect.value))}, false)
     // });
@@ -116,6 +117,7 @@ function renderDoneList() {
   itensDone(function(item) {
       item.addEventListener('click', selectDone, false)
   })
+  t.sizeTo('#estimate').done();
 }
 
 function selectDone() {
