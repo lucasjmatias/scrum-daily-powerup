@@ -42,6 +42,13 @@ li.item-done:hover {
   text-align: right;
 }
 
+button.mod-secondary, input[type="button"].mod-secondary, input[type="submit"].mod-secondary {
+	background-color: #448FAC;
+	box-shadow: none;
+	border: none;
+	color: #FFF;
+}
+
 #sprint-days-container, #done-itens-input-container, #done-list-container {
   display: flex;
   flex-direction: row;
