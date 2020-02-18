@@ -107,7 +107,7 @@ function recuperarDadosKanban(boardID, boardName) {
 
 function recuperarTotalPontosFeitos(todosCartoes, totalPontos) {
 	var diaDaSprint = contSprintDays(boardSprint.dias, boardSprint.inicio, boardSprint.feriados)
-	var feitosNoDia = R.repeat(0, diaDaSprint);
+	var feitosNoDia = R.repeat(0, diaDaSprint + 1);
 	R.forEach(function(cartao) {
 			R.forEachObjIndexed(function(pontos, dia) {
 				if (R.has(dia, feitosNoDia)) {
