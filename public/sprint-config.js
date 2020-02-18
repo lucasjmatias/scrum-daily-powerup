@@ -20,6 +20,9 @@ t.render(function(){
 });
 
 $( function() {
+  $("#btnBurndown").on('click', function() {
+    window.open('https://scrum-daily-powerup.herokuapp.com/burndown/index.html', '_blank');
+  });
   $("#inicioSprint").datepicker($.datepicker.regional[ "pt-BR" ]);
   $("#springConfigForm").on('submit', function(event){
     // Stop the browser trying to submit the form itself.
