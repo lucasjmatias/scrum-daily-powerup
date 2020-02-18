@@ -20,8 +20,8 @@
 	<div id="burndown"></div>
 	<script>
 		$(document).ready(function(){
-			var sistemaAtivo = getUrlParameter("board");
-			var temp= popularBoards("projetos");
+			var boardAtiva = getUrlParameter("board");
+			var temp= popularBoards("projetos", boardAtiva);
 		});
 	</script>
 	
