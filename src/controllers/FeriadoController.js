@@ -24,7 +24,7 @@ exports.get = (req, res, next) => {
       const feriados = data
           .filter(feriado => feriado.type_code !== 9 && !feriado.description.includes('14h'))
           .map(({date}) => date);
-      res.status(201).json(feriados);
+      res.status(200).json(feriados);
     })
     .catch(({message}) => res.status(502).json({message}));
 };

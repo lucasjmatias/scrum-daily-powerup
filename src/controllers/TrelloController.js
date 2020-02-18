@@ -67,7 +67,7 @@ exports.getBoard = (req, res, next) => {
         feriados,
         ...others
       }
-      res.status(201).json(boardData);
+      res.status(200).json(boardData);
     })
     .catch(({message}) => res.status(502).json({message}));
 };
@@ -87,7 +87,7 @@ exports.getLists = (req, res, next) => {
       }
     })
     .then(({data}) => {
-      res.status(201).json(data);
+      res.status(200).json(data);
     })
     .catch(({message}) => res.status(502).json({message}));
 };
@@ -127,7 +127,7 @@ exports.getCards = (req, res, next) => {
           ...others,
         }
       }, data);
-      res.status(201).json(preparedCards);
+      res.status(200).json(preparedCards);
     })
     .catch(({message}) => res.status(502).json({message}));
 };

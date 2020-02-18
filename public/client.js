@@ -38,6 +38,7 @@ TrelloPowerUp.initialize({
         var done = contDone(pontuacao);
         return [{
           icon: BADGE_ICON,
+          title: 'Pontuação',
           text: total === done ? done : done + ' / ' + total,
           color: total === done ? 'green' : done === 0 ? 'red' : 'yellow',
           callback: function(t) {
