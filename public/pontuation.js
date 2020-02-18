@@ -187,6 +187,8 @@ t.render(function(){
     .then(function(sprint) {
         currDay = contSprintDays(sprint.dias, sprint.inicio, sprint.feriados);
         renderItensTotal();
+    }).then(function(){
+      t.sizeTo('#estimate').done();
     });
   })
   .then(function(){
