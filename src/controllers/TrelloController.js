@@ -51,17 +51,20 @@ exports.getBoard = (req, res, next) => {
       let numeroSprint = 0;
       let dias = 0;
       let inicio = '';
+      let feriados = [];
       if (scrumData) {
         const {sprint} = JSON.parse(scrumData.value);
         numeroSprint = sprint.numero;
         dias = sprint.dias;
         inicio = sprint.inicio;
+        feriados = sprint.feriados;
       }
 
       const boardData = {
         numeroSprint,
         dias,
         inicio,
+        feriados,
         ...others
       }
       res.status(201).json(boardData);

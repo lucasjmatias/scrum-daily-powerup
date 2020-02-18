@@ -186,10 +186,7 @@ t.render(function(){
     t.get('board', 'shared', 'sprint')
     .then(function(sprint) {
         sprintTotalDays = sprint.dias;
-        var today = moment();
-        var yesterday = today.subtract(1, 'days');
-        var inicio = moment(sprint.inicio, 'DD/MM/YYYY', true);
-        currDay = yesterday.diff(inicio, 'days') + 1 - contWeekendDays(inicio, yesterday, sprint.feriados);
+        currDay = contSprintDays(sprintTotalDays, inicio, feriados);
         renderItensTotal();
     });
   })

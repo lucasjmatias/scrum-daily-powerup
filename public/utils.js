@@ -53,4 +53,12 @@ function contWeekendDays(begin, end, holidays) {
   return weekendDays;
 }
 
+function contSprintDays(sprintTotalDays, begin, holidays) {
+  var today = moment();
+  var yesterday = today.subtract(1, 'days');
+  var beginDt = moment(begin, 'DD/MM/YYYY', true);
+  var dayFromBegin = yesterday.diff(beginDt, 'days') + 1 - contWeekendDays(beginDt, yesterday, holidays);
+  return R.min(dayFromBegin, sprintTotalDays);
+}
+
 var cleanData = R.reject(R.either(R.isEmpty, R.isNil));
