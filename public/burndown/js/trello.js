@@ -91,7 +91,6 @@ function recuperarDadosKanban(boardID, boardName) {
 		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto))(cartoesSprint);
 		var contarPontosTotaisCartoes = R.pipe(R.map(R.prop('total')), R.sum, R.defaultTo(0));
 		var totalPontos = contarPontosTotaisCartoes(todosCartoes);
-		var diaDaSprint = contSprintDays(boardSprint.dias, boardSprint.inicio, boardSprint.feriados)
 		var retorno = {
 					"sistema": boardName,
 					"sprint": boardSprint.numeroSprint,
@@ -107,11 +106,13 @@ function recuperarDadosKanban(boardID, boardName) {
 }
 
 function recuperarTotalPontosFeitos(todosCartoes, totalPontos) {
-	var feitosNoDia = R.repeat(0, boardSprint.dias);
-	var feriados = boardSprint.dias;
+	var diaDaSprint = contSprintDays(boardSprint.dias, boardSprint.inicio, boardSprint.feriados)
+	var feitosNoDia = R.repeat(0, diaDaSprint);
 	R.forEach(function(cartao) {
 			R.forEachObjIndexed(function(pontos, dia) {
-				feitosNoDia[dia] += pontos;
+				if (R.has(dia, feitosNoDia)) {
+					feitosNoDia[dia] += pontos;
+				}
 			}, cartao.feitoPorDia);
 		},
 		todosCartoes
