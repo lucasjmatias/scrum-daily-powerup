@@ -24,15 +24,22 @@ function setCartoesPronto(cartoes) {
 	cartoesPronto = cartoes;
 }
 
-function popularBoards(combo) {	
+function popularBoards(combo, selected) {	
 	var urlGetBoards = "/trello/boards";
 	$.getJSON(urlGetBoards, function(data){
+		var selectedValue = null;  
 		$('#' + combo).empty();
 		$('#' + combo).append('<option value="0">Selecione</option>');
 		$.each(data, function (index, value) {
-                    $('#' + combo).append('<option value="' + value.id + '">' + value.name + '</option>');
-                });
-				
+			 if(selected === value.name || selected === value.id) {
+				 selectedValue = value.id;
+			 }
+				$('#' + combo).append('<option value="' + value.id + '">' + value.name + '</option>');
+		});
+
+		if (selectedValue) {
+			$('#' + combo).val(selectedValue).change();
+		}
 	});
 }
 

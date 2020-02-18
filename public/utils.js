@@ -61,4 +61,11 @@ function contSprintDays(sprintTotalDays, begin, holidays) {
   return R.min(dayFromBegin, sprintTotalDays);
 }
 
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
 var cleanData = R.reject(R.either(R.isEmpty, R.isNil));
