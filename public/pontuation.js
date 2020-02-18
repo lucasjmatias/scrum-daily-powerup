@@ -187,7 +187,8 @@ t.render(function(){
     }
     t.get('board', 'shared', 'sprint')
     .then(function(sprint) {
-        currDay = contSprintDays(sprint.dias, sprint.inicio, sprint.feriados);
+        sprintTotalDays = sprint.dias;
+        currDay = contSprintDays(sprintTotalDays, sprint.inicio, sprint.feriados);
         renderItensTotal();
     }).then(function(){
       t.sizeTo('#estimate').done();
