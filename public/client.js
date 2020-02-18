@@ -1,4 +1,5 @@
 var BADGE_ICON = './img/ballot-check-regular.svg';
+var BURNDOWN_ICON = './img/chart-line-down-regular.svg';
 
 TrelloPowerUp.initialize({
   'card-buttons': function(t, options){
@@ -80,6 +81,20 @@ TrelloPowerUp.initialize({
             title: "Configuração da Sprint",
             url: 'sprint-config.html',
             height: 270 
+          });
+        }
+      }, {
+        icon: BURNDOWN_ICON,
+        condition: 'always',
+        text: "Burndown",
+        callback: function (t) {
+          // window.open('https://scrum-daily-powerup.herokuapp.com/burndown/index.html?board=GPI', '_blank');
+          // Trello will call this if the user clicks on this action
+          // we could for example open a new popover...
+          t.modal({
+            title: "Burndown",
+            url: 'burndown/index.html?board=GPI',
+            fullscreen: true
           });
         }
       }];
