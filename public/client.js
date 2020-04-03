@@ -37,7 +37,6 @@ TrelloPowerUp.initialize({
         var total = parseInt(pontuacao.total);
         var done = contDone(pontuacao);
         return [{
-          icon: BADGE_ICON,
           title: 'Pontuação',
           text: total === done ? done : done + ' / ' + total,
           color: total === done ? 'green' : done === 0 ? 'red' : 'yellow',
@@ -89,9 +88,6 @@ TrelloPowerUp.initialize({
         condition: 'always',
         text: "Burndown",
         callback: function (t) {
-          // window.open('https://scrum-daily-powerup.herokuapp.com/burndown/index.html?board=GPI', '_blank');
-          // Trello will call this if the user clicks on this action
-          // we could for example open a new popover...
           t.modal({
             title: "Burndown",
             url: 'burndown/index.html?board=GPI',

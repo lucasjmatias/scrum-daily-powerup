@@ -22,7 +22,7 @@ exports.get = (req, res, next) => {
     })
     .then(({data}) => {
       const feriados = data
-          .filter(feriado => feriado.type_code !== 9 && !feriado.description.includes('14h'))
+          .filter(feriado => feriado.type_code !== "9" && !feriado.description.includes('14h'))
           .map(({date}) => date);
       res.status(200).json(feriados);
     })
