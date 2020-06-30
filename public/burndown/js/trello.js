@@ -2,6 +2,7 @@ var listas;
 var cartoesSprint;
 var cartoesFazendo;
 var cartoesPronto;
+var cartoesHomologacaoPO;
 var boardSprint;
 
 function setBoard(board) {
@@ -22,6 +23,10 @@ function setCartoesFazendo(cartoes) {
 
 function setCartoesPronto(cartoes) {	
 	cartoesPronto = cartoes;
+}
+
+function setCartoesHomologacaoPO(cartoes) {	
+	cartoesHomologacaoPO = cartoes;
 }
 
 function popularBoards(combo, selected) {	
@@ -80,6 +85,9 @@ function carregarCartoes() {
 	// Carrega os cartoes pronto
 	var listaPronto = recuperarListaPronto();
 	carregarCartoesPorLista(listaPronto.id, setCartoesPronto);
+
+	var listaHomologacaoPO = recuperarListaHomologacaoPO();
+	carregarCartoesPorLista(listaHomologacaoPO.id, setCartoesHomologacaoPO);
 }
 
 function limparCampos() {
@@ -95,7 +103,7 @@ function recuperarDadosKanban(boardID, boardName) {
 		carregarBoard(boardID);
 		carregarListas(boardID);
 		carregarCartoes();
-		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto))(cartoesSprint);
+		var todosCartoes = R.pipe(R.union(cartoesFazendo), R.union(cartoesPronto), R.union(cartoesHomologacaoPO))(cartoesSprint);
 		var contarPontosTotaisCartoes = R.pipe(R.map(R.prop('total')), R.sum, R.defaultTo(0));
 		var totalPontos = contarPontosTotaisCartoes(todosCartoes);
 		var retorno = {
@@ -130,6 +138,20 @@ function recuperarTotalPontosFeitos(todosCartoes, totalPontos) {
 	var acumulador = function(a, b){ return [a + b, a + b] };
 	var pegarArrAcumulado = R.prop(1);
 	return pegarArrAcumulado(R.mapAccum(acumulador, totalPontos, feitosNoDiaNeg));
+}
+
+function recuperarListaHomologacaoPO() {
+	var listaHmoPO = listas.filter(function (i,n){return i.name.startsWith("Homologação do PO");});
+	
+	if (listaHmoPO == 0) {
+		alert("Defina uma lista com o nome 'Homologação do PO'");
+	}
+	
+	if (listaHmoPO.length > 1) {
+		alert("Defina apenas uma lista com o nome 'Homologação do PO'");
+	}
+
+	return listaHmoPO[0];
 }
 
 function recuperarListaFazendo() {
