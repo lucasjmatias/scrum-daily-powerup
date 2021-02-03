@@ -4,7 +4,7 @@ const {sum, values, defaultTo, prop, pipe, map} = require('ramda')
 const baseURL = 'https://api.trello.com/1/'; 
 const key = process.env.TRELLO_KEY;
 const token = process.env.TRELLO_TOKEN;
-const scrumPluginId = '5e3aa7e26848e22777cdf137';
+const scrumPluginId = process.env.TRELLO_PLUGIN_ID;
 
 const contDone = pipe(prop('done'), values, sum, defaultTo(0));
 
