@@ -90,6 +90,7 @@ TrelloPowerUp.initialize({
         callback: function (t) {
           t.board('id')
             .then(function(id) {
+              console.log(id);
               t.modal({
                 title: "Burndown",
                 url: 'burndown/index.html?board=' + id,
