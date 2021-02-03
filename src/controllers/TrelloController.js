@@ -18,7 +18,7 @@ exports.getBoards = (req, res, next) => {
 
 
   trelloAxios
-    .get('members/nurea3/boards', {
+    .get('members/dailyburndown/boards', {
       params: {
         fields,
         filter,
