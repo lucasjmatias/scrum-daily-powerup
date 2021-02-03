@@ -88,11 +88,14 @@ TrelloPowerUp.initialize({
         condition: 'always',
         text: "Burndown",
         callback: function (t) {
-          t.modal({
-            title: "Burndown",
-            url: 'burndown/index.html?board=GPI',
-            fullscreen: true
-          });
+          t.board('id')
+            .then(function(id) {
+              t.modal({
+                title: "Burndown",
+                url: 'burndown/index.html?board=' + id,
+                fullscreen: true
+              });
+            })
         }
       }];
   }
